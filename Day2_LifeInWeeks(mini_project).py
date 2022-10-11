@@ -2,6 +2,7 @@
 age = input("What is your current age?")
 # 🚨 Don't change the code above 👆
 
+#Write your code below this line 👇
 maxAge=90
 realAge=int(age)
 yearLeft=maxAge-realAge
@@ -12,4 +13,3 @@ daysLeft=yearLeft*365
 message=(f"You have {daysLeft} days, {weeksLeft} weeks, and {monthsLeft} months left.")
 
 print(message)
-#Write your code below this line 👇
