@@ -6,12 +6,12 @@ name2 = input("What is their name? \n")
 
 #Write your code below this line 👇
 
-name1Lower = name1.lower()
-name2Lower = name2.lower()
+namesLower = name1.lower() + name2.lower()
 
-true = name1Lower.count("t")+name1Lower.count("r")+name1Lower.count("u")+name1Lower.count("e")+name2Lower.count("t")+name2Lower.count("r")+name2Lower.count("u")+name2Lower.count("e")
 
-love = name1Lower.count("l")+name1Lower.count("o")+name1Lower.count("v")+name1Lower.count("e")+name2Lower.count("l")+name2Lower.count("o")+name2Lower.count("v")+name2Lower.count("e")
+true = namesLower.count("t")+namesLower.count("r")+namesLower.count("u")+namesLower.count("e")
+
+love = namesLower.count("l")+namesLower.count("o")+namesLower.count("v")+namesLower.count("e")
 
 trueLove= int(f"{true}{love}")
 
