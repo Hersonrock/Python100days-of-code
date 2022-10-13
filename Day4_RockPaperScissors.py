@@ -31,6 +31,8 @@ import random
 
 playerInput = int(input("Choose, Type 0 for Rock, Type 1 for Paper or 2 for Scissors: "))
 computerInput= random.randint(0,2)
+
+#Need to make this more efficient.
 if playerInput ==0:
     if computerInput == 0:
         print("You Choose \n"+rock+"\nComputer Choose"+rock)
