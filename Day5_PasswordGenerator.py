@@ -37,5 +37,5 @@ for character in totalCharacters:
             password.append(numbers[random.randint(0,len(numbers)-1)])
             nr_numbers -= 1
             appended=True
-print(password)
 
+print("".join(password))
