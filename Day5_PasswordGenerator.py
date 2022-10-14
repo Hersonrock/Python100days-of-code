@@ -38,4 +38,4 @@ for character in totalCharacters:
             nr_numbers -= 1
             appended=True
 
-print("".join(password))
+print("Your password is: "+"".join(password))
