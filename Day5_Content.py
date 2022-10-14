@@ -71,3 +71,21 @@
    # print(sum)
 
 #here we can see another use of the range function.
+#In the content video is explained that range can also be specified a step size.
+#  numbers = (0,102,2)
+#this would make the range in steps of 2
+
+#example 6:
+   # numbers = range (1,101)
+
+   # for number in numbers:
+   #     if number%3==0 or number%5==0: 
+   #         if number%3==0 and number%5==0: 
+   #             print("FizzBuzz")
+   #         elif number%5==0:
+   #             print("Buzz")
+   #         else:
+   #             print("Fizz")
+   #     else:
+   #         print(number)
+#The trick here was to appropiately organize the if nest. as the order matters.
