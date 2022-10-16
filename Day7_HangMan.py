@@ -4,7 +4,6 @@
 #Using "requests" , installed with command "pip install requests"
 #   see: https://www.geeksforgeeks.org/get-post-requests-using-python/
 
-from tkinter.tix import Tree
 import requests
 randomWordURL = "https://random-word-api.herokuapp.com/word"
 randomWordRAW = requests.get(url=randomWordURL)
