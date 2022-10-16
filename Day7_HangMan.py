@@ -82,7 +82,8 @@ def update ():
     print(guessWord)
     print("Letters given: " + guessDone)
     print("Lives Remaining: "+ str(lives) )
-    print(stages[lives-1])
+    if lives >1:
+        print(stages[lives-1])
 
 def solved():
     i=len(randomWordString)
