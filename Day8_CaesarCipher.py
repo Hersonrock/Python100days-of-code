@@ -8,6 +8,7 @@ inputMessage=""
 shiftNumber=0
 
 def continueGameQuestion():
+    global continueCipher
     continueCipherstr=input("Type \'yes\' if you want to go again. Otherwise type \'no\': ")
     if continueCipherstr.lower()=="no":
         continueCipher=False
@@ -48,4 +49,5 @@ while continueCipher:
     print("Here's the encoded result: "+outputMessage)
     
     continueGameQuestion()
-    
+
+print("Good Bye")
