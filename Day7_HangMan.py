@@ -5,13 +5,71 @@
 #   see: https://www.geeksforgeeks.org/get-post-requests-using-python/
 
 import requests
+
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+
 randomWordURL = "https://random-word-api.herokuapp.com/word"
 randomWordRAW = requests.get(url=randomWordURL)
 randomWordStringRaw= randomWordRAW.text
 randomWordString=randomWordStringRaw[2:-2]
 #print (randomWordString)
 guessWord= []
-lives=10
+lives=6
 guessLetter=""
 index = -1
 hit= False
@@ -24,8 +82,7 @@ def update ():
     print(guessWord)
     print("Letters given: " + guessDone)
     print("Lives Remaining: "+ str(lives) )
-
-
+    print(stages[lives-1])
 
 def solved():
     i=len(randomWordString)
