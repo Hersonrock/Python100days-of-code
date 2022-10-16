@@ -53,7 +53,6 @@ while not solved() and lives!=0:
             hit=True
     if hit==False:
         lives -= 1
-        print("hit is false")
     index= -1
     update()
     
