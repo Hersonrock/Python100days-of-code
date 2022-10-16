@@ -30,17 +30,15 @@ def shifter(message,shiftNumber):
     
     global outputMessage
     for i in range(1,len(message)+1):
-        charOrder= ord(message[i-2:i-len(message)-1])+shiftNumber
-        print(message[i-1:i-len(message)]+ " world")
-        while charOrder < 97 :
-            charOrder += 26  #123-97
-        while charOrder > 122:
-            charOrder -= 26  #123-97e
-
-    
+        charOrder= ord(message[i-1])+shiftNumber
+        if charOrder!= 32 + shiftNumber:
+            while charOrder < 97 :
+                charOrder += 26  #123-97
+            while charOrder > 122:
+                charOrder -= 26  #123-97
+        else:
+            charOrder=32
         outputMessage += chr(charOrder)
-
-
 
 while continueCipher:
     
