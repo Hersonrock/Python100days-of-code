@@ -24,7 +24,7 @@ def update ():
     print(guessWord)
     print("Letters given: " + guessDone)
     print("Lives Remaining: "+ str(lives) )
-    print("\n")
+
 
 
 def solved():
@@ -41,9 +41,8 @@ print("Welcome to HangMan, will you guess in time?")
 update()
 
 while not solved() and lives!=0:
-    guessLetter=input("Guess a letter: ")
+    guessLetter=input("Guess a letter: ").lower()
     hit=False
-   
     guessDone += guessLetter
     for randomWordLetter in randomWordString:
         index += 1
