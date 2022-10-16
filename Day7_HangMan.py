@@ -16,12 +16,14 @@ lives=10
 guessLetter=""
 index = -1
 hit= False
+guessDone=""
 
 for character in randomWordString:
     guessWord.append("_")
 
 def update ():
     print(guessWord)
+    print("Letters given: " + guessDone)
     print("(lives:", end='') 
     for i in range(lives):
         print ("*", end='')
@@ -46,6 +48,8 @@ update()
 while not solved() and lives!=0:
     guessLetter=input("Guess a letter: ")
     hit=False
+   
+    guessDone += guessLetter
     for randomWordLetter in randomWordString:
         index += 1
         if guessLetter == randomWordLetter:
@@ -61,5 +65,6 @@ while not solved() and lives!=0:
 if solved():
     print("You Win!!!")
 else:
+    print("The word was "+ "".join(randomWordString))
     print("You Lose,try again")
 
