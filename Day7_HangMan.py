@@ -9,7 +9,7 @@ randomWordURL = "https://random-word-api.herokuapp.com/word"
 randomWordRAW = requests.get(url=randomWordURL)
 randomWordStringRaw= randomWordRAW.text
 randomWordString=randomWordStringRaw[2:-2]
-print (randomWordString)
+#print (randomWordString)
 guessWord= []
 lives=10
 guessLetter=""
