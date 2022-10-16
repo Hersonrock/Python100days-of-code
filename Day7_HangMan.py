@@ -24,10 +24,6 @@ for character in randomWordString:
 def update ():
     print(guessWord)
     print("Letters given: " + guessDone)
-    print("(lives:", end='') 
-    for i in range(lives):
-        print ("*", end='')
-    print(")")
     print("Lives Remaining: "+ str(lives) )
     print("\n")
 
@@ -59,7 +55,7 @@ while not solved() and lives!=0:
         lives -= 1
     index= -1
     update()
-    
+
 
 
 if solved():
