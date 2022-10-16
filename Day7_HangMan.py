@@ -26,6 +26,7 @@ def update ():
     for i in range(lives):
         print ("*", end='')
     print(")")
+    print("Lives Remaining: "+ str(lives) )
     print("\n")
 
 
@@ -42,8 +43,9 @@ def solved():
 print("Welcome to HangMan, will you guess in time?")
 update()
 
-while not solved() or lives==0:
+while not solved() and lives!=0:
     guessLetter=input("Guess a letter: ")
+    hit=False
     for randomWordLetter in randomWordString:
         index += 1
         if guessLetter == randomWordLetter:
@@ -51,6 +53,7 @@ while not solved() or lives==0:
             hit=True
     if hit==False:
         lives -= 1
+        print("hit is false")
     index= -1
     update()
     
