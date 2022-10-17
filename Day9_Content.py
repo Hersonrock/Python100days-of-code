@@ -24,4 +24,4 @@ programming_dictionary["Bug"] = "A moth in your computer"
 for thing in programming_dictionary:
     print(thing)
 # This will give me just the keys
-    print(programing_dictionary[key])
+print(programming_dictionary["key"])
