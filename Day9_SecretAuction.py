@@ -42,8 +42,8 @@ while other_bidders:
     else:
       print("Wrong Answer, please try again.")
 
-print(logo)     
 os.system('cls')
+print(logo)     
 
 for bidder_number in bidders_dic:
      if   bidders_dic[bidder_number][1]>max_bid:
