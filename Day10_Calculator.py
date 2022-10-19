@@ -41,10 +41,13 @@ operations = {
 }
 
 num1 = int(input("What's the first number?: "))
-num2 = int(input("What's the second number?: "))
+
 for symbol in operations:
     print(symbol)
 operation_symbol=input("Pick an operation from the line above: ")
+
+num2 = int(input("What's the second number?: "))
+
 
 #This seems hard to understand, but the dictionary entry can be used to refer to the function by just its name.
 #The name is then substituted, based on the first value pair (the symbol)
