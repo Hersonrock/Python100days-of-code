@@ -31,7 +31,6 @@ def divide(n1, n2):
     else:
         print("Cannot divide by 0")
         return 
-    
 
 operations = {
     "+":add,
@@ -39,19 +38,48 @@ operations = {
     "*":multiply,
     "/":divide,
 }
-
-num1 = int(input("What's the first number?: "))
-
-for symbol in operations:
-    print(symbol)
-operation_symbol=input("Pick an operation from the line above: ")
-
-num2 = int(input("What's the second number?: "))
+continue_calculating=True
+continue_calculating_raw=""
+flag=True
+print(logo)
 
 
-#This seems hard to understand, but the dictionary entry can be used to refer to the function by just its name.
-#The name is then substituted, based on the first value pair (the symbol)
-calculation_function = operations[operation_symbol]
-answer = calculation_function(num1, num2)
+def calculation(previous):
 
-print (f"{num1} {operation_symbol} {num2} = {answer}")
+    if flag:
+        num1 = int(input("What's the first number?: "))
+
+    for symbol in operations:
+          print(symbol)
+    operation_symbol=input("Pick an operation from the line above: ")
+    num2 = int(input("What's the second number?: "))
+
+    calculation_function = operations[operation_symbol]
+    if flag:
+        result= calculation_function(num1, num2)
+        return [num1, operation_symbol, num2, result]
+    else:
+        result= calculation_function(previous, num2)
+        return [previous, operation_symbol, num2, result]
+
+
+while continue_calculating:
+
+    if flag:
+        result_data= calculation(1)
+    else:
+        result= result_data[3]
+        result_data= calculation(result)
+
+    print (f"{result_data[0]} {result_data[1]} {result_data[2]} = {result_data[3]}")
+
+    while continue_calculating_raw!="y" and continue_calculating_raw!="n":
+        continue_calculating_raw=input(f"Type \'y\' to continue calculating with {result_data[3]}, or type \'n\' to exit: ")
+        if continue_calculating_raw=="y":
+            continue_calculating=True
+        elif continue_calculating_raw=="n":
+            continue_calculating=False
+    continue_calculating_raw=""
+    flag=False
+
+print("Good Bye")
