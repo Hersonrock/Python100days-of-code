@@ -30,6 +30,8 @@ def divide(n1, n2):
         return n1/n2
     else:
         print("Cannot divide by 0")
+        print("Good Bye")
+        exit()
         return 
 
 operations = {
@@ -47,12 +49,12 @@ print(logo)
 def calculation(previous):
 
     if flag:
-        num1 = int(input("What's the first number?: "))
+        num1 = float(input("What's the first number?: "))
         for symbol in operations:
             print(symbol)
 
     operation_symbol=input("Pick an operation: ")
-    num2 = int(input("What's the next number?: "))
+    num2 = float(input("What's the next number?: "))
 
     calculation_function = operations[operation_symbol]
     if flag:
