@@ -53,8 +53,8 @@ def computer_deal():
     card1=random_deal()
     card2=random_deal()
     return [card1,card2]   
-    ##Working here....
-    
+    ##Working here.....
+
 while continue_playing:
     refresh()
     print("Welcome to BlackJack!")
