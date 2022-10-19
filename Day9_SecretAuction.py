@@ -24,6 +24,7 @@ max_bid_name=""
 
 while other_bidders:
   os.system('cls')
+  print(logo)
   i += 1
   other_bidders_raw=""
   print("Welcome to the secret auction program.")
@@ -40,6 +41,9 @@ while other_bidders:
       other_bidders=False
     else:
       print("Wrong Answer, please try again.")
+
+print(logo)     
+os.system('cls')
 
 for bidder_number in bidders_dic:
      if   bidders_dic[bidder_number][1]>max_bid:
