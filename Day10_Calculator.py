@@ -48,11 +48,11 @@ def calculation(previous):
 
     if flag:
         num1 = int(input("What's the first number?: "))
+        for symbol in operations:
+            print(symbol)
 
-    for symbol in operations:
-          print(symbol)
-    operation_symbol=input("Pick an operation from the line above: ")
-    num2 = int(input("What's the second number?: "))
+    operation_symbol=input("Pick an operation: ")
+    num2 = int(input("What's the next number?: "))
 
     calculation_function = operations[operation_symbol]
     if flag:
@@ -73,13 +73,17 @@ while continue_calculating:
 
     print (f"{result_data[0]} {result_data[1]} {result_data[2]} = {result_data[3]}")
 
-    while continue_calculating_raw!="y" and continue_calculating_raw!="n":
-        continue_calculating_raw=input(f"Type \'y\' to continue calculating with {result_data[3]}, or type \'n\' to exit: ")
+    while continue_calculating_raw!="y" and continue_calculating_raw!="n" and continue_calculating_raw!="a":
+        continue_calculating_raw=input(f"Type \'y\' to continue calculating with {result_data[3]}, type \'a\' to start again or \'n\' to exit: ")
         if continue_calculating_raw=="y":
             continue_calculating=True
-        elif continue_calculating_raw=="n":
+            flag=False
+        elif continue_calculating_raw=="a":
+            continue_calculating=True
+            flag=True
+        else:
             continue_calculating=False
     continue_calculating_raw=""
-    flag=False
+    
 
 print("Good Bye")
