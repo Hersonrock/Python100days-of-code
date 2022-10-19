@@ -16,6 +16,7 @@ import random
 #HINT: Clearing the Screen
 #   os.system('cls')
 bank_total=1000
+
 bet_ammount=0
 continue_playing=True
 continue_playing_raw=""
@@ -27,16 +28,21 @@ def refresh():
     print(logo)
 
 def betStart():
+    global bet_ammount
+    global bank_total
     while bet_ammount==0:
         bet_ammount=int(input("How much do you want to bet?: "))
         if bet_ammount<=bank_total:
             bank_total -=bet_ammount
         else:
             print("Try a smaller ammount")
+            bet_ammount=0
     
 def continue_playing_function():
+    global continue_playing
+    global continue_playing_raw
     while continue_playing_raw!="y" and continue_playing_raw!="n":
-        continue_playing_raw=input("Do you want to continue playing? (y/n): ").lower
+        continue_playing_raw=input("Do you want to continue playing? (y/n): ").lower()
         if continue_playing_raw=="y":
             continue_playing=True
         elif continue_playing_raw=="n":
