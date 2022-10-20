@@ -9,6 +9,7 @@ logo = """
       `------'                           |__/           
 """
 
+from glob import glob
 import os
 import random
 
@@ -22,6 +23,8 @@ continue_playing=True
 continue_playing_raw=""
 continue_hand=True
 cards=[11,2,3,4,5,6,7,8,9,10,10,10]
+dealer_hand_total=0
+player_hand_total=0
 
 def refresh():
     os.system('cls')
@@ -71,22 +74,21 @@ def ace_check_when_losing(hand):
         return True
 
 def  computer_auto():
+    global dealer_hand_total
+    global bank_total
+    global round
+    global index
     while dealer_hand_total<21:
         dealer_hand.append(random_deal())
         dealer_hand_total += dealer_hand[round-1]
         round+= 1 
-        if ace_check_when_losing(dealer_hand):
-            dealer_hand_total-=10
-            for card in dealer_hand:
-                index+=1
-                if card==11:
-                    dealer_hand[index]=1
-    if win_check(dealer_hand_total):
-        print("Is a draw")
-        bank_total+=bet_ammount
-    else:
-        print("You Win")
-        bank_total+=bet_ammount*2
+    #     if ace_check_when_losing(dealer_hand):
+    #         dealer_hand_total-=10
+    #         for card in dealer_hand:
+    #             index+=1
+    #             if card==11:
+    #                 dealer_hand[index]=1
+
 
 while continue_playing:
     refresh()
@@ -96,58 +98,83 @@ while continue_playing:
     betStart()
     dealer_hand=[]
     player_hand=[]
-    dealer_hand_total=0
-    player_hand_total=0
-    round=1
+    round=2
     flag=True
     index=-1
    
     while continue_hand:
 
-        for cards in range(1,round+2):
-            # dealer_hand.append(random_deal())
-            # player_hand.append(random_deal())
-            dealer_hand_total += dealer_hand[round-1]
-            player_hand_total += player_hand[round-1] 
-            round+= 1 
-            if ace_check_when_losing(player_hand):
-                player_hand_total-=10
-                for card in player_hand:
-                    index+=1
-                    if card==11:
-                        player_hand[index]=1
-            if ace_check_when_losing(dealer_hand):
-                dealer_hand_total-=10
-                for card in dealer_hand:
-                    index+=1
-                    if card==11:
-                        dealer_hand[index]=1
-
+        for i in range(0,2):
+            dealer_hand.append(random_deal())
+            player_hand.append(random_deal())
+            dealer_hand_total += dealer_hand[i]
+            player_hand_total += player_hand[i] 
+         
+            # if ace_check_when_losing(player_hand):
+            #     player_hand_total-=10
+            #     for card in player_hand:
+            #         index+=1
+            #         if card==11:
+            #             player_hand[index]=1
+            # if ace_check_when_losing(dealer_hand):
+            #     dealer_hand_total-=10
+            #     for card in dealer_hand:
+            #         index+=1
+            #         if card==11:
+            #             dealer_hand[index]=1
+        print(f"1Dealer hand is {dealer_hand}")
+        print(f"1Your hand is {player_hand}")
         if win_check(player_hand_total):
             continue_hand=False
+            
             computer_auto()
+            print(f"2Dealer hand is {dealer_hand}")
+            print(f"2Your hand is {player_hand}")
+            if win_check(dealer_hand_total):
+                print("Is a draw")
+                bank_total+=bet_ammount
+            else:
+                print("You Win")
+                bank_total+=bet_ammount*2
+            
         elif player_hand_total<21:
             while player_hand_total<21 and continue_hand==True:
-                continue_hand_raw=input("Hit or Stand?: ").lower
+                continue_hand_raw=input("Hit or Stand?: ").lower()
         
                 if continue_hand_raw=="stand":
                     continue_hand=False
+                    continue_playing= False 
+                    computer_auto()
+                    print(f"4Dealer hand is {dealer_hand}")
+                    print(f"4Your hand is {player_hand}")
                 elif continue_hand_raw=="hit":
                     player_hand.append(random_deal())
-                    player_hand_total += player_hand[round-1] 
+                    player_hand_total += player_hand[round] 
                     round+= 1 
-                    if ace_check_when_losing(player_hand):
-                        player_hand_total-=10
-                        for card in player_hand:
-                            index+=1
-                            if card==11:
-                                player_hand[index]=1
+                    # if ace_check_when_losing(player_hand):
+                    #     player_hand_total-=10
+                    #     for card in player_hand:
+                    #         index+=1
+                    #         if card==11:
+                    #             player_hand[index]=1
+                    print(f"3Dealer hand is {dealer_hand}")
+                    print(f"3Your hand is {player_hand}")
+                    print(f"3Your total is {player_hand_total}")
+                continue_hand_raw=""
             if win_check(player_hand_total):
                 continue_hand=False
+                continue_playing= False 
                 computer_auto()
+                print(f"4Dealer hand is {dealer_hand}")
+                print(f"4Your hand is {player_hand}")
             else:
                 print("You lose")
-                
+                continue_hand=False
+                continue_playing= False 
+        else:
+            print("You lose")
+            continue_hand=False
+            continue_playing= False        
                 
         
 
