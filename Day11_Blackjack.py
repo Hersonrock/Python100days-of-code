@@ -79,24 +79,23 @@ def under_21(hand):
         return True
 
 def over_21(hand):
-
     if sum(hand)>21:
         return True
 
 def hit():
     """checks if the player wants an extra card \"hit\" or not \"stand\" """
-    askForCard=None
+    ask_for_card=None
    
-    while askForCard==None:
+    while ask_for_card==None:
         answer= input("Hit or Stand?: ").lower()
         if answer=="hit":
-            askForCard=True
+            ask_for_card=True
         elif answer=="stand":
-            askForCard=False
+            ask_for_card=False
         else:
             print("Incorrect option, try again")
 
-    return askForCard
+    return ask_for_card
 
 def print_hand(hand,isPlayer,isFirstRound):
     """Function will print based on the list Hand, if the print if for a player and if it is the first round or not"""
@@ -126,63 +125,63 @@ while continue_playing:
     bet_total= bank_total-bet_start()
     bank_total -= bet_total
     bet_multiplier=2
-    dealerHand=[]
-    playerHand=[]
-    playerWon=-2
+    dealer_hand=[]
+    player_hand=[]
+    player_won=-2
 
     #Computer and player first deal
     for i in range(0,2):
-        dealerHand.append(random_deal())
-        playerHand.append(random_deal())
-    if ace_check(dealerHand)!=-1:
-        dealerHand[ace_check(dealerHand)]=1
-    if ace_check(playerHand)!=-1:
-        playerHand[ace_check(playerHand)]=1    
-    print_hand(dealerHand,False,True)
-    print_hand(playerHand,True,True)
+        dealer_hand.append(random_deal())
+        player_hand.append(random_deal())
+    if ace_check(dealer_hand)!=-1:
+        dealer_hand[ace_check(dealer_hand)]=1
+    if ace_check(player_hand)!=-1:
+        player_hand[ace_check(player_hand)]=1    
+    print_hand(dealer_hand,False,True)
+    print_hand(player_hand,True,True)
 
     #Natural Win initial check, a winner can be defined here by the first deal.
-    if check_21(dealerHand) or check_21(playerHand):
-        if check_21(dealerHand) and check_21(playerHand):
+    if check_21(dealer_hand) or check_21(player_hand):
+        if check_21(dealer_hand) and check_21(player_hand):
             print("Is a Tie")
-            playerWon=-1
-        elif check_21(dealerHand):
+            player_won=-1
+        elif check_21(dealer_hand):
             print("You Lose")
-            playerWon=0
-        elif check_21(playerHand):
+            player_won=0
+        elif check_21(player_hand):
             print("You Win")
-            playerWon=1
+            player_won=1
             bank_total+=bet_total*bet_multiplier
             print("Bank: $"+str(bank_total))
     #Game CoreLoop ; player -2=None, -1=Tie, 0=Loss, 1=Win
-    while playerWon==-2:
+    while player_won==-2:
         #If the player wants to stay with current hand , computer will loop untill game is outcome is defined.
         if not hit():
-            while sum(dealerHand)<=sum(playerHand) and under_21(dealerHand):
-                dealerHand.append(random_deal())
-                if ace_check(dealerHand)!=-1:
-                    dealerHand[ace_check(dealerHand)]=1
-            print_hand(dealerHand,False,False)
-            if over_21(dealerHand):
+            while sum(dealer_hand)<=sum(player_hand) and under_21(dealer_hand):
+                dealer_hand.append(random_deal())
+                if ace_check(dealer_hand)!=-1:
+                    dealer_hand[ace_check(dealer_hand)]=1
+            print_hand(dealer_hand,False,False)
+            if over_21(dealer_hand):
                 print("You Win")
-                playerWon=1
+                player_won=1
                 bank_total+=bet_total*bet_multiplier
                 print("Bank: $"+str(bank_total))
-            elif check_21(dealerHand) or sum(dealerHand)>sum(playerHand):
+            elif check_21(dealer_hand) or sum(dealer_hand)>sum(player_hand):
                 print("You Lose")
-                playerWon=0
+                player_won=0
         #If player wants another hand, a random card is appended and win conditions are checked, until player wins, losses or asks for another card.
         else:
-            playerHand.append(random_deal())
-            if ace_check(playerHand)!=-1:
-                playerHand[ace_check(playerHand)]=1
-            print_hand(playerHand,True,False)
-            if over_21(playerHand):
+            player_hand.append(random_deal())
+            if ace_check(player_hand)!=-1:
+                player_hand[ace_check(player_hand)]=1
+            print_hand(player_hand,True,False)
+            if over_21(player_hand):
                 print("You Lose")
-                playerWon=0
-            elif check_21(playerHand):
+                player_won=0
+            elif check_21(player_hand):
                 print("You Win")
-                playerWon=1
+                player_won=1
                 bank_total+=bet_total*bet_multiplier
                 print("Bank: $"+str(bank_total))
 
