@@ -168,7 +168,7 @@ while continue_playing:
                 dealer_hand.append(random_deal())
                 if ace_check(dealer_hand)!=-1:
                     dealer_hand[ace_check(dealer_hand)]=1
-            print_hand(dealer_hand,False,False)
+                print_hand(dealer_hand,False,False)
             if (sum(dealer_hand)==sum(player_hand)):
                 print("Is a Tie")
                 player_won=-1
