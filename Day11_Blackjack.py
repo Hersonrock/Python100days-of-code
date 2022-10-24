@@ -164,7 +164,7 @@ while continue_playing:
         if not hit():
             #here the condition for 17 is acording to BlackJack rules, dealer is forced to take another card if it is under 17
             print_hand(dealer_hand,False,False)
-            while (sum(dealer_hand)<sum(player_hand)) and (sum(dealer_hand)<17):
+            while ((sum(dealer_hand)<sum(player_hand)) and (under_21(dealer_hand)) or (sum(dealer_hand)<17)):
                 dealer_hand.append(random_deal())
                 if ace_check(dealer_hand)!=-1:
                     dealer_hand[ace_check(dealer_hand)]=1
@@ -174,7 +174,7 @@ while continue_playing:
                 player_won=-1
                 bank_total+=bet_total
                 print("Bank: $"+str(bank_total))
-            if over_21(dealer_hand):
+            if (over_21(dealer_hand) or (sum(dealer_hand)<sum(player_hand))):
                 print("You Win")
                 player_won=1
                 bank_total+=bet_total*bet_multiplier
@@ -182,6 +182,7 @@ while continue_playing:
             elif (check_21(dealer_hand) or sum(dealer_hand)>sum(player_hand)):
                 print("You Lose")
                 player_won=0
+
         #If player wants another hand, a random card is appended and win conditions are checked, until player wins, losses or asks for another card.
         else:
             player_hand.append(random_deal())
