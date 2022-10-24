@@ -15,8 +15,8 @@ import random
 
 #HINT: Clearing the Screen
 #   os.system('cls')
-
-bank_total=1000
+bank_initial_ammount=1500
+bank_total=bank_initial_ammount
 continue_playing=True
 cards=[11,2,3,4,5,6,7,8,9,10,10,10]
 
@@ -192,5 +192,5 @@ while continue_playing:
     if bank_total>0:
         continue_playing=continue_playing_function()
     else:
-        bank_total=1500
+        bank_total=bank_initial_ammount
         continue_playing=continue_playing_function()
