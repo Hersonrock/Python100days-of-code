@@ -16,7 +16,6 @@ import random
 #   os.system('cls')
 
 bank_total=1000
-bet_ammount=0
 continue_playing=True
 continue_playing_raw=""
 cards=[11,2,3,4,5,6,7,8,9,10,10,10]
@@ -26,12 +25,15 @@ def refresh():
     print(logo)
 
 def betStart():
-    while bet_ammount==0:
-        bet_ammount=int(input("How much do you want to bet?: "))
-        if bet_ammount<=bank_total:
-            bank_total -=bet_ammount
+    total=bank_total
+    bet_amount=0
+    while bet_amount==0:
+        bet_amount=int(input("How much do you want to bet?: $"))
+        if bet_amount<=total:
+            total-= bet_amount
         else:
             print("Try a smaller ammount")
+    return total
     
 def continue_playing_function():
     while continue_playing_raw!="y" and continue_playing_raw!="n":
@@ -53,6 +55,17 @@ while continue_playing:
     print("Welcome to BlackJack!")
     print("Shuffling...")
     print("Bank: $"+str(bank_total))
-    betStart()
+    bank_total= betStart()
+
+    # dealerHand=[]
+    # playerHand=[]
+    # gameRound=0
+
+    #Computer and player first deal
+    # for i in range(0,2):
+    #     dealerHand=random_deal()
+    #     playerHand=random_deal()
+    # print(f"Dealer Hand: {dealerHand[0]},{dealerHand[1]}")
+    # print(f"Dealer Hand: {playerHand[0]},{playerHand[1]}")
 
     continue_playing_function()
