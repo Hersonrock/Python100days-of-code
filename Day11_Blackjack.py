@@ -19,7 +19,6 @@ bank_total=1000
 bet_ammount=0
 continue_playing=True
 continue_playing_raw=""
-
 cards=[11,2,3,4,5,6,7,8,9,10,10,10]
 
 def refresh():
@@ -36,7 +35,7 @@ def betStart():
     
 def continue_playing_function():
     while continue_playing_raw!="y" and continue_playing_raw!="n":
-        continue_playing_raw=input("Do you want to continue playing? (y/n): ").lower
+        continue_playing_raw=input("Do you want to continue playing? (y/n): ").lower()
         if continue_playing_raw=="y":
             continue_playing=True
         elif continue_playing_raw=="n":
@@ -48,12 +47,6 @@ def continue_playing_function():
 def random_deal():
     first_deal= random.randint(0,11)
     return cards[first_deal]
-
-def computer_deal():
-    card1=random_deal()
-    card2=random_deal()
-    return [card1,card2]   
-    ##Working here.....
 
 while continue_playing:
     refresh()
