@@ -9,10 +9,9 @@ logo = """
       `------'                           |__/           
 """
 
-from ctypes import sizeof
 import os
 import random
-from tkinter import N
+
 
 #HINT: Clearing the Screen
 #   os.system('cls')
@@ -142,10 +141,9 @@ while continue_playing:
     if ace_check(playerHand)!=-1:
         playerHand[ace_check(playerHand)]=1    
     
-    # printHand(dealerHand,False,True)
-    # printHand(playerHand,True,True)
-    print(f"Dealer Hand: {dealerHand[0]},{dealerHand[1]}")
-    print(f"Player Hand: {playerHand[0]},{playerHand[1]}")
+    printHand(dealerHand,False,True)
+    printHand(playerHand,True,True)
+
     
     if check21(dealerHand) or check21(playerHand):
         if check21(dealerHand) and check21(playerHand):
@@ -155,15 +153,15 @@ while continue_playing:
         elif check21(playerHand):
             print("You Win")
 
-    # if not hit():
-    #     while sumHand(dealerHand)<sumHand(playerHand) and under21(dealerHand):
-    #         dealerHand.append(random_deal())
-    #         if ace_check(dealerHand)!=-1:
-    #             dealerHand[ace_check(dealerHand)]=1
-    #     printHand(dealerHand,False,False)
-    #     if over21(dealerHand):
-    #         print("You Win")
-    #     elif check21(dealerHand) or sumHand(dealerHand)>sumHand(playerHand):
-    #         print("You Lose")
+    if not hit():
+        while sumHand(dealerHand)<sumHand(playerHand) and under21(dealerHand):
+            dealerHand.append(random_deal())
+            if ace_check(dealerHand)!=-1:
+                dealerHand[ace_check(dealerHand)]=1
+        printHand(dealerHand,False,False)
+        if over21(dealerHand):
+            print("You Win")
+        elif check21(dealerHand) or sumHand(dealerHand)>sumHand(playerHand):
+            print("You Lose")
     
     continue_playing=continue_playing_function()
