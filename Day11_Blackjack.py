@@ -18,8 +18,8 @@ import random
 
 bank_total=1000
 continue_playing=True
-cards=[11,2,3,4,5,6,7,8,9,10,10,10]
-
+#cards=[11,2,3,4,5,6,7,8,9,10,10,10]
+cards=[11,11,11,11,11,10,10,10,10,10,10,10]
 def refresh():
     os.system('cls')
     print(logo)
@@ -52,17 +52,27 @@ def random_deal():
     return cards[first_deal]
 
 def ace_check(hand):
-    sum=0
+
     index=-1
-    for card in hand:
-        sum +=card
-    if sum>21:
+    if sumHand(hand)>21:
         for card in hand:
             index += 1
             if card ==11:
                 return index
     else:
         return -1
+
+def  sumHand(hand):
+
+    sum=0
+    for card in hand:
+        sum +=card
+    return sum
+
+def check21(hand):
+
+    if sumHand(hand)==21:
+        return True
 
 while continue_playing:
     refresh()
@@ -87,9 +97,15 @@ while continue_playing:
         playerHand[ace_check(playerHand)]=1    
     
     print(f"Dealer Hand: {dealerHand[0]},{dealerHand[1]}")
-    print(f"Dealer Hand: {playerHand[0]},{playerHand[1]}")
+    print(f"Player Hand: {playerHand[0]},{playerHand[1]}")
     
-
+    if check21(dealerHand) or check21(playerHand):
+        if check21(dealerHand) and check21(playerHand):
+            print("Is a tie")
+        elif check21(dealerHand):
+            print("You lose")
+        elif check21(playerHand):
+            print("You Win")
 
 
 
