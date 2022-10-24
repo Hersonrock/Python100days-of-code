@@ -189,4 +189,8 @@ while continue_playing:
                 bank_total+=bet_total*bet_multiplier
                 print("Bank: $"+str(bank_total))
 
-    continue_playing=continue_playing_function()
+    if bank_total>0:
+        continue_playing=continue_playing_function()
+    else:
+        bank_total=1500
+        continue_playing=continue_playing_function()
