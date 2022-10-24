@@ -9,6 +9,7 @@ logo = """
       `------'                           |__/           
 """
 
+from ctypes import sizeof
 import os
 import random
 
@@ -50,6 +51,19 @@ def random_deal():
     first_deal= random.randint(0,11)
     return cards[first_deal]
 
+def ace_check(hand):
+    sum=0
+    index=-1
+    for card in hand:
+        sum +=card
+    if sum>21:
+        for card in hand:
+            index += 1
+            if card ==11:
+                return index
+    else:
+        return -1
+
 while continue_playing:
     refresh()
     print("Welcome to BlackJack!")
@@ -67,7 +81,16 @@ while continue_playing:
         playerHand.append(random_deal())
         
 
+    if ace_check(dealerHand)!=-1:
+        dealerHand[ace_check(dealerHand)]=1
+    if ace_check(playerHand)!=-1:
+        playerHand[ace_check(playerHand)]=1    
+    
     print(f"Dealer Hand: {dealerHand[0]},{dealerHand[1]}")
     print(f"Dealer Hand: {playerHand[0]},{playerHand[1]}")
+    
+
+
+
 
     continue_playing=continue_playing_function()
