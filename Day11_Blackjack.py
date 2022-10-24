@@ -124,7 +124,9 @@ while continue_playing:
     print("Welcome to BlackJack!")
     print("Shuffling...")
     print("Bank: $"+str(bank_total))
-    bank_total= betStart()
+    bet_total= bank_total-betStart()
+    bank_total -= bet_total
+    bet_multiplier=2
 
     dealerHand=[]
     playerHand=[]
@@ -155,6 +157,8 @@ while continue_playing:
         elif check21(playerHand):
             print("You Win")
             playerWon=1
+            bank_total+=bet_total*bet_multiplier
+            print("Bank: $"+str(bank_total))
 
     while playerWon==-2:
         if not hit():
@@ -166,6 +170,8 @@ while continue_playing:
             if over21(dealerHand):
                 print("You Win")
                 playerWon=1
+                bank_total+=bet_total*bet_multiplier
+                print("Bank: $"+str(bank_total))
             elif check21(dealerHand) or sumHand(dealerHand)>sumHand(playerHand):
                 print("You Lose")
                 playerWon=0
@@ -180,5 +186,7 @@ while continue_playing:
             elif check21(playerHand):
                 print("You Win")
                 playerWon=1
+                bank_total+=bet_total*bet_multiplier
+                print("Bank: $"+str(bank_total))
 
     continue_playing=continue_playing_function()
