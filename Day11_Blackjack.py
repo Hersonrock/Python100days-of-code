@@ -17,7 +17,6 @@ import random
 
 bank_total=1000
 continue_playing=True
-continue_playing_raw=""
 cards=[11,2,3,4,5,6,7,8,9,10,10,10]
 
 def refresh():
@@ -36,12 +35,13 @@ def betStart():
     return total
     
 def continue_playing_function():
+    continue_playing_raw=""
     while continue_playing_raw!="y" and continue_playing_raw!="n":
         continue_playing_raw=input("Do you want to continue playing? (y/n): ").lower()
         if continue_playing_raw=="y":
-            continue_playing=True
+            return True
         elif continue_playing_raw=="n":
-            continue_playing=False
+            return False
         else:    
             print("Invalid Option")
     continue_playing_raw=""
@@ -68,4 +68,4 @@ while continue_playing:
     # print(f"Dealer Hand: {dealerHand[0]},{dealerHand[1]}")
     # print(f"Dealer Hand: {playerHand[0]},{playerHand[1]}")
 
-    continue_playing_function()
+    continue_playing=continue_playing_function()
