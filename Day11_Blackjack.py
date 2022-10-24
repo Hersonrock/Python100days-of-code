@@ -154,7 +154,7 @@ while continue_playing:
             print("You Win")
 
     if not hit():
-        while sumHand(dealerHand)<sumHand(playerHand) and under21(dealerHand):
+        while sumHand(dealerHand)<=sumHand(playerHand) and under21(dealerHand):
             dealerHand.append(random_deal())
             if ace_check(dealerHand)!=-1:
                 dealerHand[ace_check(dealerHand)]=1
