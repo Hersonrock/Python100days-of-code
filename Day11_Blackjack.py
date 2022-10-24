@@ -40,7 +40,7 @@ def bet_start():
 def continue_playing_function():
     """checks if the player wants to continue playing"""
     continue_playing_raw=""
-    while continue_playing_raw!="y" and continue_playing_raw!="n":
+    while (continue_playing_raw!="y" and continue_playing_raw!="n"):
         continue_playing_raw=input("Do you want to continue playing? (y/n): ").lower()
         if continue_playing_raw=="y":
             return True
@@ -142,7 +142,7 @@ while continue_playing:
 
     #Natural Win initial check, a winner can be defined here by the first deal.
  
-    if check_21(dealer_hand) and check_21(player_hand):
+    if (check_21(dealer_hand) and check_21(player_hand)):
         print_hand(dealer_hand,False,False)
         print("Is a Tie")
         player_won=-1
@@ -160,7 +160,7 @@ while continue_playing:
     while player_won==-2:
         #If the player wants to stay with current hand , computer will loop untill game is outcome is defined.
         if not hit():
-            while sum(dealer_hand)<=sum(player_hand) and under_21(dealer_hand):
+            while (sum(dealer_hand)<=sum(player_hand)) and (under_21(dealer_hand)):
                 dealer_hand.append(random_deal())
                 if ace_check(dealer_hand)!=-1:
                     dealer_hand[ace_check(dealer_hand)]=1
@@ -170,7 +170,7 @@ while continue_playing:
                 player_won=1
                 bank_total+=bet_total*bet_multiplier
                 print("Bank: $"+str(bank_total))
-            elif check_21(dealer_hand) or sum(dealer_hand)>sum(player_hand):
+            elif (check_21(dealer_hand) or sum(dealer_hand)>sum(player_hand)):
                 print("You Lose")
                 player_won=0
         #If player wants another hand, a random card is appended and win conditions are checked, until player wins, losses or asks for another card.
