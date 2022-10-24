@@ -160,11 +160,16 @@ while continue_playing:
     while player_won==-2:
         #If the player wants to stay with current hand , computer will loop untill game is outcome is defined.
         if not hit():
-            while (sum(dealer_hand)<=sum(player_hand)) and (under_21(dealer_hand)):
+            #here the condition for 17 is acording to BlackJack rules, dealer is forced to take another card if it is under 17
+            print_hand(dealer_hand,False,False)
+            while (sum(dealer_hand)<sum(player_hand)) and (sum(dealer_hand)<17):
                 dealer_hand.append(random_deal())
                 if ace_check(dealer_hand)!=-1:
                     dealer_hand[ace_check(dealer_hand)]=1
             print_hand(dealer_hand,False,False)
+            if (sum(dealer_hand)==sum(player_hand)):
+                print("Is a Tie")
+                player_won=-1
             if over_21(dealer_hand):
                 print("You Win")
                 player_won=1
