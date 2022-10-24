@@ -52,7 +52,7 @@ def continue_playing_function():
 
 def random_deal():
     """deals a random card from the cards list"""
-    first_deal= random.randint(0,11)
+    first_deal= random.randint(0,12)
     return cards[first_deal]
 
 def ace_check(hand):
@@ -146,6 +146,8 @@ while continue_playing:
         print_hand(dealer_hand,False,False)
         print("Is a Tie")
         player_won=-1
+        bank_total+=bet_total
+        print("Bank: $"+str(bank_total))
     elif check_21(dealer_hand):
         print_hand(dealer_hand,False,False)
         print("You Lose")
@@ -170,6 +172,8 @@ while continue_playing:
             if (sum(dealer_hand)==sum(player_hand)):
                 print("Is a Tie")
                 player_won=-1
+                bank_total+=bet_total
+                print("Bank: $"+str(bank_total))
             if over_21(dealer_hand):
                 print("You Win")
                 player_won=1
