@@ -141,21 +141,21 @@ while continue_playing:
     print_hand(player_hand,True,True)
 
     #Natural Win initial check, a winner can be defined here by the first deal.
-    if check_21(dealer_hand) or check_21(player_hand):
-        if check_21(dealer_hand) and check_21(player_hand):
-            print_hand(dealer_hand,False,False)
-            print("Is a Tie")
-            player_won=-1
-        elif check_21(dealer_hand):
-            print_hand(dealer_hand,False,False)
-            print("You Lose")
-            player_won=0
-        elif check_21(player_hand):
-            print_hand(dealer_hand,False,False)
-            print("You Win")
-            player_won=1
-            bank_total+=bet_total*bet_multiplier
-            print("Bank: $"+str(bank_total))
+ 
+    if check_21(dealer_hand) and check_21(player_hand):
+        print_hand(dealer_hand,False,False)
+        print("Is a Tie")
+        player_won=-1
+    elif check_21(dealer_hand):
+        print_hand(dealer_hand,False,False)
+        print("You Lose")
+        player_won=0
+    elif check_21(player_hand):
+        print_hand(dealer_hand,False,False)
+        print("You Win")
+        player_won=1
+        bank_total+=bet_total*bet_multiplier
+        print("Bank: $"+str(bank_total))
     #Game CoreLoop ; player -2=None, -1=Tie, 0=Loss, 1=Win
     while player_won==-2:
         #If the player wants to stay with current hand , computer will loop untill game is outcome is defined.
