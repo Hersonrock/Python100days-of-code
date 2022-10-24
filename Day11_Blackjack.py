@@ -57,15 +57,17 @@ while continue_playing:
     print("Bank: $"+str(bank_total))
     bank_total= betStart()
 
-    # dealerHand=[]
-    # playerHand=[]
-    # gameRound=0
+    dealerHand=[]
+    playerHand=[]
+    gameRound=0
 
     #Computer and player first deal
-    # for i in range(0,2):
-    #     dealerHand=random_deal()
-    #     playerHand=random_deal()
-    # print(f"Dealer Hand: {dealerHand[0]},{dealerHand[1]}")
-    # print(f"Dealer Hand: {playerHand[0]},{playerHand[1]}")
+    for i in range(0,2):
+        dealerHand.append(random_deal())
+        playerHand.append(random_deal())
+        
+
+    print(f"Dealer Hand: {dealerHand[0]},{dealerHand[1]}")
+    print(f"Dealer Hand: {playerHand[0]},{playerHand[1]}")
 
     continue_playing=continue_playing_function()
