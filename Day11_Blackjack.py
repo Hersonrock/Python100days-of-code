@@ -24,7 +24,7 @@ def refresh():
     os.system('cls')
     print(logo)
 
-def betStart():
+def bet_start():
     total=bank_total
     bet_amount=0
     while bet_amount==0:
@@ -54,7 +54,7 @@ def random_deal():
 def ace_check(hand):
 
     index=-1
-    if sumHand(hand)>21:
+    if sum_hand(hand)>21:
         for card in hand:
             index += 1
             if card ==11:
@@ -64,26 +64,26 @@ def ace_check(hand):
     else:
         return -1
 
-def  sumHand(hand):
+def sum_hand(hand):
 
     sum=0
     for card in hand:
         sum +=card
     return sum
 
-def check21(hand):
+def check_21(hand):
 
-    if sumHand(hand)==21:
+    if sum_hand(hand)==21:
         return True
 
-def under21(hand):
+def under_21(hand):
 
-    if sumHand(hand)<21:
+    if sum_hand(hand)<21:
         return True
 
-def over21(hand):
+def over_21(hand):
 
-    if sumHand(hand)>21:
+    if sum_hand(hand)>21:
         return True
 
 def hit():
@@ -101,7 +101,7 @@ def hit():
 
     return askForCard
 
-def  printHand(hand,isPlayer,isFirstRound):
+def print_hand(hand,isPlayer,isFirstRound):
 
     for i in range(0,len(hand)):
         if i==0:
@@ -111,11 +111,11 @@ def  printHand(hand,isPlayer,isFirstRound):
                 print(f"Dealer Hand: {hand[i]},",end="")
         elif i==len(hand)-1:
             if isPlayer:
-                print(f"{hand[i]} = {sumHand(hand)}")
+                print(f"{hand[i]} = {sum_hand(hand)}")
             elif isFirstRound:
                 print("X")
             else:
-                print(f"{hand[i]} = {sumHand(hand)}")
+                print(f"{hand[i]} = {sum_hand(hand)}")
         else:
             print(f"{hand[i]},",end="")
 
@@ -124,7 +124,7 @@ while continue_playing:
     print("Welcome to BlackJack!")
     print("Shuffling...")
     print("Bank: $"+str(bank_total))
-    bet_total= bank_total-betStart()
+    bet_total= bank_total-bet_start()
     bank_total -= bet_total
     bet_multiplier=2
 
@@ -143,18 +143,18 @@ while continue_playing:
     if ace_check(playerHand)!=-1:
         playerHand[ace_check(playerHand)]=1    
     
-    printHand(dealerHand,False,True)
-    printHand(playerHand,True,True)
+    print_hand(dealerHand,False,True)
+    print_hand(playerHand,True,True)
 
     
-    if check21(dealerHand) or check21(playerHand):
-        if check21(dealerHand) and check21(playerHand):
+    if check_21(dealerHand) or check_21(playerHand):
+        if check_21(dealerHand) and check_21(playerHand):
             print("Is a Tie")
             playerWon=-1
-        elif check21(dealerHand):
+        elif check_21(dealerHand):
             print("You Lose")
             playerWon=0
-        elif check21(playerHand):
+        elif check_21(playerHand):
             print("You Win")
             playerWon=1
             bank_total+=bet_total*bet_multiplier
@@ -162,28 +162,28 @@ while continue_playing:
 
     while playerWon==-2:
         if not hit():
-            while sumHand(dealerHand)<=sumHand(playerHand) and under21(dealerHand):
+            while sum_hand(dealerHand)<=sum_hand(playerHand) and under_21(dealerHand):
                 dealerHand.append(random_deal())
                 if ace_check(dealerHand)!=-1:
                     dealerHand[ace_check(dealerHand)]=1
-            printHand(dealerHand,False,False)
-            if over21(dealerHand):
+            print_hand(dealerHand,False,False)
+            if over_21(dealerHand):
                 print("You Win")
                 playerWon=1
                 bank_total+=bet_total*bet_multiplier
                 print("Bank: $"+str(bank_total))
-            elif check21(dealerHand) or sumHand(dealerHand)>sumHand(playerHand):
+            elif check_21(dealerHand) or sum_hand(dealerHand)>sum_hand(playerHand):
                 print("You Lose")
                 playerWon=0
         else:
             playerHand.append(random_deal())
             if ace_check(playerHand)!=-1:
                 playerHand[ace_check(playerHand)]=1
-            printHand(playerHand,True,False)
-            if over21(playerHand):
+            print_hand(playerHand,True,False)
+            if over_21(playerHand):
                 print("You Lose")
                 playerWon=0
-            elif check21(playerHand):
+            elif check_21(playerHand):
                 print("You Win")
                 playerWon=1
                 bank_total+=bet_total*bet_multiplier
