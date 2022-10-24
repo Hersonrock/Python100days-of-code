@@ -72,20 +72,20 @@ def  sumHand(hand):
         sum +=card
     return sum
 
-# def check21(hand):
+def check21(hand):
 
-#     if sumHand(hand)==21:
-#         return True
+    if sumHand(hand)==21:
+        return True
 
-# def under21(hand):
+def under21(hand):
 
-#     if sumHand(hand)<21:
-#         return True
+    if sumHand(hand)<21:
+        return True
 
-# def over21(hand):
+def over21(hand):
 
-#     if sumHand(hand)>21:
-#         return True
+    if sumHand(hand)>21:
+        return True
 
 def hit():
 
@@ -102,23 +102,23 @@ def hit():
 
     return askForCard
 
-# def  printHand(hand,isPlayer,isFristRound):
+def  printHand(hand,isPlayer,isFirstRound):
 
-#     for i in range(0,len(hand)):
-#         if i==0:
-#             if isPlayer:
-#                 print(f"Player Hand: {hand[i]},",end="")
-#             else:
-#                 print(f"Dealer Hand: {hand[i]},",end="")
-#         elif i==len(hand)-1:
-#             if isPlayer:
-#                 print(f"{hand[i]} = {sumHand(hand)}")
-#             elif isFristRound:
-#                 print("X")
-#             else:
-#                 print(f"{hand[i]} = {sumHand(hand)}")
-#         else:
-#             print(f"{hand[i]},",end="")
+    for i in range(0,len(hand)):
+        if i==0:
+            if isPlayer:
+                print(f"Player Hand: {hand[i]},",end="")
+            else:
+                print(f"Dealer Hand: {hand[i]},",end="")
+        elif i==len(hand)-1:
+            if isPlayer:
+                print(f"{hand[i]} = {sumHand(hand)}")
+            elif isFirstRound:
+                print("X")
+            else:
+                print(f"{hand[i]} = {sumHand(hand)}")
+        else:
+            print(f"{hand[i]},",end="")
 
 while continue_playing:
     refresh()
