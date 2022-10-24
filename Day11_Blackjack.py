@@ -54,7 +54,7 @@ def random_deal():
 def ace_check(hand):
 
     index=-1
-    if sum_hand(hand)>21:
+    if sum(hand)>21:
         for card in hand:
             index += 1
             if card ==11:
@@ -64,26 +64,19 @@ def ace_check(hand):
     else:
         return -1
 
-def sum_hand(hand):
-
-    sum=0
-    for card in hand:
-        sum +=card
-    return sum
-
 def check_21(hand):
 
-    if sum_hand(hand)==21:
+    if sum(hand)==21:
         return True
 
 def under_21(hand):
 
-    if sum_hand(hand)<21:
+    if sum(hand)<21:
         return True
 
 def over_21(hand):
 
-    if sum_hand(hand)>21:
+    if sum(hand)>21:
         return True
 
 def hit():
@@ -111,11 +104,11 @@ def print_hand(hand,isPlayer,isFirstRound):
                 print(f"Dealer Hand: {hand[i]},",end="")
         elif i==len(hand)-1:
             if isPlayer:
-                print(f"{hand[i]} = {sum_hand(hand)}")
+                print(f"{hand[i]} = {sum(hand)}")
             elif isFirstRound:
                 print("X")
             else:
-                print(f"{hand[i]} = {sum_hand(hand)}")
+                print(f"{hand[i]} = {sum(hand)}")
         else:
             print(f"{hand[i]},",end="")
 
@@ -162,7 +155,7 @@ while continue_playing:
 
     while playerWon==-2:
         if not hit():
-            while sum_hand(dealerHand)<=sum_hand(playerHand) and under_21(dealerHand):
+            while sum(dealerHand)<=sum(playerHand) and under_21(dealerHand):
                 dealerHand.append(random_deal())
                 if ace_check(dealerHand)!=-1:
                     dealerHand[ace_check(dealerHand)]=1
@@ -172,7 +165,7 @@ while continue_playing:
                 playerWon=1
                 bank_total+=bet_total*bet_multiplier
                 print("Bank: $"+str(bank_total))
-            elif check_21(dealerHand) or sum_hand(dealerHand)>sum_hand(playerHand):
+            elif check_21(dealerHand) or sum(dealerHand)>sum(playerHand):
                 print("You Lose")
                 playerWon=0
         else:
