@@ -128,7 +128,7 @@ while continue_playing:
 
     dealerHand=[]
     playerHand=[]
-
+    playerWon=-2
 
     #Computer and player first deal
     for i in range(0,2):
@@ -148,20 +148,37 @@ while continue_playing:
     if check21(dealerHand) or check21(playerHand):
         if check21(dealerHand) and check21(playerHand):
             print("Is a Tie")
+            playerWon=-1
         elif check21(dealerHand):
             print("You Lose")
+            playerWon=0
         elif check21(playerHand):
             print("You Win")
+            playerWon=1
 
-    if not hit():
-        while sumHand(dealerHand)<=sumHand(playerHand) and under21(dealerHand):
-            dealerHand.append(random_deal())
-            if ace_check(dealerHand)!=-1:
-                dealerHand[ace_check(dealerHand)]=1
-        printHand(dealerHand,False,False)
-        if over21(dealerHand):
-            print("You Win")
-        elif check21(dealerHand) or sumHand(dealerHand)>sumHand(playerHand):
-            print("You Lose")
-    
+    while playerWon==-2:
+        if not hit():
+            while sumHand(dealerHand)<=sumHand(playerHand) and under21(dealerHand):
+                dealerHand.append(random_deal())
+                if ace_check(dealerHand)!=-1:
+                    dealerHand[ace_check(dealerHand)]=1
+            printHand(dealerHand,False,False)
+            if over21(dealerHand):
+                print("You Win")
+                playerWon=1
+            elif check21(dealerHand) or sumHand(dealerHand)>sumHand(playerHand):
+                print("You Lose")
+                playerWon=0
+        else:
+            playerHand.append(random_deal())
+            if ace_check(playerHand)!=-1:
+                playerHand[ace_check(playerHand)]=1
+            printHand(playerHand,True,False)
+            if over21(playerHand):
+                print("You Lose")
+                playerWon=0
+            elif check21(playerHand):
+                print("You Win")
+                playerWon=1
+
     continue_playing=continue_playing_function()
