@@ -16,6 +16,8 @@ logo="""
 import random
 
 
+EASY_LEVEL_TURNS=10
+HARD_LEVEL_TURNS=5
 difficulty=None
 attempts=0
 secret=random.randint(1,100)
@@ -43,12 +45,9 @@ while (difficulty==None):
         print("Wrong option")
 
 if difficulty==1:
-    attempts=10
+    attempts=EASY_LEVEL_TURNS
 elif difficulty==2:
-    attempts=5
-
-print(f"The secret number is : {secret}")
-
+    attempts=HARD_LEVEL_TURNS
 
 while attempts>0:
     while True:
