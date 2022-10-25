@@ -29,12 +29,6 @@ print(logo)
 print("Welcome to the Number Guessing Game!")
 print("I'm thinking of a number between 1 and 100.")
 
-def is_in_range(number):
-    for i in range(1,101):
-        if number == i:
-            return True
-    return False
-
 while (difficulty==None):
     difficulty_raw=input("Choose a difficulty. Type \'easy\' or \'hard\': ").lower()
     if (difficulty_raw=="easy"):
@@ -51,23 +45,22 @@ elif difficulty==2:
 
 while attempts>0:
     while True:
+        #makes sure the input both a number and in range 
         try:
             guess=int(input("Make a guess: "))
             attempts -=1
-            if is_in_range(guess):
+            if guess >=1 and guess<=100:
                 
                 break
             else:
                 print("Number out of range, try again.")
                 print(f"Attempts remaining= {attempts}")
-                
         except:
             attempts-=1
             print("Please input a number, try again.")
             print(f"Attempts remaining= {attempts}")
             
-            
-
+#Checks for win condition
     if guess==secret:
         print("Congratulations")
         win=True
