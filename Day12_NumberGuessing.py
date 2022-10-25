@@ -20,6 +20,7 @@ difficulty=None
 attempts=0
 secret=random.randint(1,100)
 guess=0
+win=False
 
 
 print(logo)
@@ -48,13 +49,38 @@ elif difficulty==2:
 
 print(f"The secret number is : {secret}")
 
-while True:
-    try:
-        guess=int(input("Make a guess: "))
-        if is_in_range(guess):
-            break
-        else:
-            print("Number out of range, try again.")
-    except:
-        print("Please input a number, try again.")
 
+while attempts>0:
+    while True:
+        try:
+            guess=int(input("Make a guess: "))
+            attempts -=1
+            if is_in_range(guess):
+                
+                break
+            else:
+                print("Number out of range, try again.")
+                print(f"Attempts remaining= {attempts}")
+                
+        except:
+            attempts-=1
+            print("Please input a number, try again.")
+            print(f"Attempts remaining= {attempts}")
+            
+            
+
+    if guess==secret:
+        print("Congratulations")
+        win=True
+        attempts=0
+    elif guess<secret:
+        print("Too Low")
+    else:
+        print("Too high")
+
+    print(f"Attempts remaining= {attempts}")
+
+if win:
+    print("You win!")
+else:
+    print("You lose")
