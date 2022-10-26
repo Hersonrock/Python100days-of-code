@@ -24,7 +24,7 @@ secret=random.randint(1,100)
 guess=0
 win=False
 
-
+#Game Setup
 print(logo)
 print("Welcome to the Number Guessing Game!")
 print("I'm thinking of a number between 1 and 100.")
@@ -43,9 +43,11 @@ if difficulty==1:
 elif difficulty==2:
     attempts=HARD_LEVEL_TURNS
 
+
+#Game CoreLoop
 while attempts>0:
     while True:
-        #makes sure the input both a number and in range 
+        #makes sure the input is both a number, and in range 
         try:
             guess=int(input("Make a guess: "))
             attempts -=1
