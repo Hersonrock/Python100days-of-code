@@ -1,11 +1,12 @@
 logo = """           _ _     _               _    _ _       _                 _                               _____                      
      /\   | | |   (_)             | |  | (_)     | |               | |                             / ____|                     
     /  \  | | |__  _  ___  _ __   | |__| |_  __ _| |__   ___ _ __  | |     _____      _____ _ __  | |  __  __ _ _ __ ___   ___ 
-   / /\ \ | | '_ \| |/ _ \| '_ \  |  __  | |/ _` | '_ \ / _ \ '__| | |    / _ \ \ /\ / / _ \ '__| | | |_ |/ _` | '_ ` _ \ / _ \
+   / /\ \ | | '_ \| |/ _ \| '_ \  |  __  | |/ _` | '_ \ / _ \ '__| | |    / _ \ \ /\ / / _ \ '__| | | |_ |/ _` | '_ ` _ \ / _ \\
   / ____ \| | |_) | | (_) | | | | | |  | | | (_| | | | |  __/ |    | |___| (_) \ V  V /  __/ |    | |__| | (_| | | | | | |  __/
  /_/    \_\_|_.__/|_|\___/|_| |_| |_|  |_|_|\__, |_| |_|\___|_|    |______\___/ \_/\_/ \___|_|     \_____|\__,_|_| |_| |_|\___|
                                              __/ |                                                                             
-                                            |___/                                                                              """
+                                            |___/                                                                              
+"""
 
 #Based of MMORPG https://albiononline.com/en/home , Api https://www.albion-online-data.com/api/swagger/index.html
 
@@ -18,6 +19,13 @@ import requests  # used for sending requests to the API
 import json # used for manipulating JSON data
 import pprint    # used for formatting the output of JSON objects received in API responses
 import random
+import os
+#HINT: Clearing the Screen
+#   os.system('cls')
+import time
+# time.sleep(3) Sleep for 3 seconds
+
+
 
 
 DATA_URL = 'https://www.albion-online-data.com/api/v2/stats/Prices/'
@@ -45,7 +53,11 @@ def item_cost(tier,item):
      data=response.json()
      return data[0]["sell_price_min"]
 
+
+os.system('cls')
+
 while play_again==True:
+     print (logo)
      while not lose:
           #Variable intialization, choosing city, tier and items
           item1=0
@@ -69,6 +81,7 @@ while play_again==True:
 
           #Getting player input
           choice=int(input(f"T{random_tier}_{ITEM_LIST[item1]} or T{random_tier}_{ITEM_LIST[item2]} 1 Or 2?: "))
+          
           print(f"T{random_tier}_{ITEM_LIST[item1]} costs: {item1_cost}")
           print(f"T{random_tier}_{ITEM_LIST[item2]} costs: {item2_cost}")
 
@@ -85,17 +98,27 @@ while play_again==True:
                if more_expensive!=choice:
                     print("Wrong, you lose")
                     lose=True
+                    
                else:
                     print("Nice,you know the market")
           else:
                print("They actually cost the same today")
+          if lose==False:
+               time.sleep(1)
+               os.system('cls')
+               print(logo)
+          
 
      play_again_input=input("Want to play again? (y/n): ")
+
      if play_again_input=="y":
           play_again=True
           lose=False
+          os.system('cls')
      else:
           play_again=False
+          os.system('cls')
+     
 
      
 print("Thanks for playing")
