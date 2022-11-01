@@ -21,63 +21,81 @@ import random
 
 
 DATA_URL = 'https://www.albion-online-data.com/api/v2/stats/Prices/'
-LOCATION_RAW = '?locations=Fort+Sterling'
-LOCATION='Fort Sterling'
+ITEM_LIST= ["ORE","HIDE","FIBER","WOOD","ROCK"]
+CITY_LIST=["Thetford", "Fort+Sterling", "Lymhurst", "Bridgewatch", "Martlock"]
 QUALITY = '&qualities=1'
 MAX_TIER=8
 
 lose=False
+play_again=True
 
 #Test request https://albion-online-data.com/api/v2/stats/Prices/T4_CAPE?locations=Fort%20Sterling&qualities=1
 
-item_list= ["ORE","HIDE","FIBER","WOOD","ROCK"]
+
 
 def item_get(tier,item):
-     
+     """ string constructor """
      item= (f"T{tier}_"+item)
 
      return item
 
 def item_cost(tier,item):
-     response = requests.get(DATA_URL+item_get(tier,item_list[item])+LOCATION_RAW+QUALITY)
+     """gets the item price based on tier and item type"""
+     response = requests.get(DATA_URL+item_get(tier,ITEM_LIST[item])+location_raw+QUALITY)
      data=response.json()
      return data[0]["sell_price_min"]
 
-while not lose:
-     item1=0
-     item2=0
-     random_tier=random.randint(1,MAX_TIER)
-     while item1==item2:
-          item1=random.randint(0,4)
-          item2=random.randint(0,4)
+while play_again==True:
+     while not lose:
+          #Variable intialization, choosing city, tier and items
+          item1=0
+          item2=0
+          random_tier=random.randint(1,MAX_TIER)
+          random_city=CITY_LIST[random.randint(0,4)]
+          location_raw = "?locations="+ random_city
+          while item1==item2:
+               item1=random.randint(0,4)
+               item2=random.randint(0,4)
 
-     item1_cost= item_cost(random_tier,item1)
-     item2_cost= item_cost(random_tier,item2)
+          #Caching item cost
+          item1_cost= item_cost(random_tier,item1)
+          item2_cost= item_cost(random_tier,item2)
 
-
-     print("In " + LOCATION + ", which one costs the most?")
-
-     choice=int(input(f"T{random_tier}_{item_list[item1]} or T{random_tier}_{item_list[item2]} 1 Or 2?: "))
-     print(f"T{random_tier}_{item_list[item1]} costs: {item1_cost}")
-     print(f"T{random_tier}_{item_list[item2]} costs: {item2_cost}")
-
-     if(item1_cost>item2_cost):
-          more_expensive=1
-     elif(item1_cost<item2_cost):
-          more_expensive=2
-     else:
-          more_expensive=0
-
-     if more_expensive!=0:
-          if more_expensive!=choice:
-               print("Wrong, you lose")
-               lose=True
+          #Pretty format
+          if random_city!="Fort+Sterling":
+               print("In " + random_city + ", which one costs the most?")
           else:
-               print("Nice,you know the market")
+               print("In " + "Fort Sterling" + ", which one costs the most?")
+
+          #Getting player input
+          choice=int(input(f"T{random_tier}_{ITEM_LIST[item1]} or T{random_tier}_{ITEM_LIST[item2]} 1 Or 2?: "))
+          print(f"T{random_tier}_{ITEM_LIST[item1]} costs: {item1_cost}")
+          print(f"T{random_tier}_{ITEM_LIST[item2]} costs: {item2_cost}")
+
+
+          #Determining if win or lose
+          if(item1_cost>item2_cost):
+               more_expensive=1
+          elif(item1_cost<item2_cost):
+               more_expensive=2
+          else:
+               more_expensive=0
+
+          if more_expensive!=0:
+               if more_expensive!=choice:
+                    print("Wrong, you lose")
+                    lose=True
+               else:
+                    print("Nice,you know the market")
+          else:
+               print("They actually cost the same today")
+
+     play_again_input=input("Want to play again? (y/n): ")
+     if play_again_input=="y":
+          play_again=True
+          lose=False
      else:
-          print("They actually cost the same today")
+          play_again=False
 
      
-
-
 print("Thanks for playing")
