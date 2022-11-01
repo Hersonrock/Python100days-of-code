@@ -22,6 +22,20 @@ DATA_URL = 'https://www.albion-online-data.com/api/v2/stats/Prices/'
 LOCATION = '?locations=Fort%20Sterling'
 QUALITY = '&qualities=1'
 
-response = requests.get(DATA_URL+'T4_CAPE'+LOCATION+QUALITY)
-data=response.json()
-print (data[0]["sell_price_min"])
+#Test request https://albion-online-data.com/api/v2/stats/Prices/T4_CAPE?locations=Fort%20Sterling&qualities=1
+
+item_list= ["ORE","HIDE","FIBER","WOOD","ROCK"]
+
+def item_get(tier,item):
+     
+     item= (f"T{tier}_"+item)
+
+     return item
+
+
+
+for i in range(1,9):
+     response = requests.get(DATA_URL+item_get(i,item_list[0])+LOCATION+QUALITY)
+     data=response.json()
+     print(DATA_URL+item_get(i,item_list[0])+LOCATION+QUALITY)
+     print (str(data[0]["sell_price_min"]))
