@@ -17,10 +17,16 @@ logo = """           _ _     _               _    _ _       _                 _ 
 import requests  # used for sending requests to the API
 import json # used for manipulating JSON data
 import pprint    # used for formatting the output of JSON objects received in API responses
+import random
+
 
 DATA_URL = 'https://www.albion-online-data.com/api/v2/stats/Prices/'
-LOCATION = '?locations=Fort%20Sterling'
+LOCATION_RAW = '?locations=Fort+Sterling'
+LOCATION='Fort Sterling'
 QUALITY = '&qualities=1'
+MAX_TIER=8
+
+lose=False
 
 #Test request https://albion-online-data.com/api/v2/stats/Prices/T4_CAPE?locations=Fort%20Sterling&qualities=1
 
@@ -32,10 +38,46 @@ def item_get(tier,item):
 
      return item
 
-
-
-for i in range(1,9):
-     response = requests.get(DATA_URL+item_get(i,item_list[0])+LOCATION+QUALITY)
+def item_cost(tier,item):
+     response = requests.get(DATA_URL+item_get(tier,item_list[item])+LOCATION_RAW+QUALITY)
      data=response.json()
-     print(DATA_URL+item_get(i,item_list[0])+LOCATION+QUALITY)
-     print (str(data[0]["sell_price_min"]))
+     return data[0]["sell_price_min"]
+
+while not lose:
+     item1=0
+     item2=0
+     random_tier=random.randint(1,MAX_TIER)
+     while item1==item2:
+          item1=random.randint(0,4)
+          item2=random.randint(0,4)
+
+     item1_cost= item_cost(random_tier,item1)
+     item2_cost= item_cost(random_tier,item2)
+
+
+     print("In " + LOCATION + ", which one costs the most?")
+
+     choice=int(input(f"T{random_tier}_{item_list[item1]} or T{random_tier}_{item_list[item2]} 1 Or 2?: "))
+     print(f"T{random_tier}_{item_list[item1]} costs: {item1_cost}")
+     print(f"T{random_tier}_{item_list[item2]} costs: {item2_cost}")
+
+     if(item1_cost>item2_cost):
+          more_expensive=1
+     elif(item1_cost<item2_cost):
+          more_expensive=2
+     else:
+          more_expensive=0
+
+     if more_expensive!=0:
+          if more_expensive!=choice:
+               print("Wrong, you lose")
+               lose=True
+          else:
+               print("Nice,you know the market")
+     else:
+          print("They actually cost the same today")
+
+     
+
+
+print("Thanks for playing")
