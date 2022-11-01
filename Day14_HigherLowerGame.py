@@ -26,8 +26,6 @@ import time
 # time.sleep(3) Sleep for 3 seconds
 
 
-
-
 DATA_URL = 'https://www.albion-online-data.com/api/v2/stats/Prices/'
 ITEM_LIST= ["ORE","HIDE","FIBER","WOOD","ROCK"]
 CITY_LIST=["Thetford", "Fort+Sterling", "Lymhurst", "Bridgewatch", "Martlock"]
@@ -38,8 +36,6 @@ lose=False
 play_again=True
 
 #Test request https://albion-online-data.com/api/v2/stats/Prices/T4_CAPE?locations=Fort%20Sterling&qualities=1
-
-
 
 def item_get(tier,item):
      """ string constructor """
@@ -86,14 +82,15 @@ while play_again==True:
           print(f"T{random_tier}_{ITEM_LIST[item2]} costs: {item2_cost}")
 
 
-          #Determining if win or lose
+          #Determining which item costs the most
           if(item1_cost>item2_cost):
                more_expensive=1
           elif(item1_cost<item2_cost):
                more_expensive=2
           else:
                more_expensive=0
-
+          
+          #Determining win or lose
           if more_expensive!=0:
                if more_expensive!=choice:
                     print("Wrong, you lose")
@@ -103,12 +100,13 @@ while play_again==True:
                     print("Nice,you know the market")
           else:
                print("They actually cost the same today")
+          #Clearing screen only if winning
           if lose==False:
                time.sleep(1)
                os.system('cls')
                print(logo)
           
-
+     #Play again question.
      play_again_input=input("Want to play again? (y/n): ")
 
      if play_again_input=="y":
