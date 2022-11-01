@@ -22,5 +22,6 @@ DATA_URL = 'https://www.albion-online-data.com/api/v2/stats/Prices/'
 LOCATION = '?locations=Fort%20Sterling'
 QUALITY = '&qualities=1'
 
-response = requests.get(DATA_URL+'T4_CAPE'+LOCATION+QUALITY).json()
-print (response)
+response = requests.get(DATA_URL+'T4_CAPE'+LOCATION+QUALITY)
+data=response.json()
+print (data[0]["sell_price_min"])
