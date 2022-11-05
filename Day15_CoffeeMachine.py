@@ -7,7 +7,8 @@ coffee_dic= {
 }
 
 #resources [water,coffee,milk]
-starting_resources=[300, 100, 200]
+avail_resources=[300, 100, 200]
+
 coin_worth={
     "penny": 1,
     "nickel": 5,
@@ -21,22 +22,31 @@ order_requested=False
 
 def report():
     
-    print( f"Water={starting_resources[0]}")
-    print( f"Coffee={starting_resources[1]}")
-    print( f"Milk={starting_resources[2]}")
+    print( f"Water\t=\t{avail_resources[0]}")
+    print( f"Coffee\t=\t{avail_resources[1]}")
+    print( f"Milk\t=\t{avail_resources[2]}")
 
 def enough_resources(choice):
 
-    if coffee_dic[choice]["water"] > starting_resources[0]:
+    if coffee_dic[choice]["water"] > avail_resources[0]:
         print("There is not enough Water for this option, Try again")
         return False
-    elif coffee_dic[choice]["coffee"] > starting_resources[1]:
+    elif coffee_dic[choice]["coffee"] > avail_resources[1]:
         print("There is not enough Coffee for this option, Try again")
         return False
-    elif coffee_dic[choice]["milk"] > starting_resources[2]:
+    elif coffee_dic[choice]["milk"] > avail_resources[2]:
         print("There is not enough Milk for this option, Try again")
         return False
     return True
+
+def remaining_resources(choice):
+    consumed=[
+        avail_resources[0]-coffee_dic[choice]["water"],
+        avail_resources[1]-coffee_dic[choice]["coffee"],
+        avail_resources[2]-coffee_dic[choice]["milk"]
+    ]
+    return consumed
+
 
 while machine_on:
 
@@ -47,7 +57,8 @@ while machine_on:
         elif choice=="espresso" or choice== "latte" or choice =="cappuccino":
             order_requested=True
             if enough_resources(choice):
-               print("Processing order")
+                avail_resources=remaining_resources(choice)
+                print("Processing order")
             
         elif choice=="off":
             machine_on= False
@@ -57,8 +68,9 @@ while machine_on:
     #Refresh for new order.
     order_requested=False
 
-    # # It should check resources before asking for coins.
-    # print("Sorry there is not enough X, try another option")
+
+print("Turning off...")
+
 
     # # ask for inputs
     # input("How many quarters?: ")
