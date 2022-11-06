@@ -9,7 +9,7 @@ coffee_dic= {
 #resources [water,coffee,milk]
 avail_resources=[300, 100, 200]
 
-coin_worth={
+COIN_WORTH={
     "penny": 1,
     "nickel": 5,
     "dime": 10,
@@ -47,19 +47,42 @@ def remaining_resources(choice):
     ]
     return consumed
 
+def process_coins(choice):
+    pennies=int(input("How many pennies?: "))
+    nickels= int(input("How many nickels?: "))
+    dimes= int(input("How many dimes?: "))
+    quarters= int(input("How many quarters?: "))
+    
+    total= pennies*COIN_WORTH["penny"]+nickels*COIN_WORTH["nickel"]+dimes*COIN_WORTH["dime"]+quarters*COIN_WORTH["quarter"]
+
+    if total >= coffee_dic[choice]["price"]:
+        return total
+    else:
+        print("Sorry that's not enough money. Money refunded.")
+        return -1
+
 
 while machine_on:
 
     while not order_requested:
-        choice=input("What would you like? \(espresso\/latte\/cappuccino\): ").lower()
+        choice=input("What would you like? (espresso/latte/cappuccino): ").lower()
         if choice=="report":
             report()
         elif choice=="espresso" or choice== "latte" or choice =="cappuccino":
+            #Here the main order will be processed.
             order_requested=True
             if enough_resources(choice):
                 avail_resources=remaining_resources(choice)
-                print("Processing order")
-            
+                money_input_raw=process_coins(choice)
+                if  money_input_raw != -1:
+                    change_raw= money_input_raw- coffee_dic[choice]["price"]
+                    #Building strings after handling amounts in cents.
+                    money_input_str= f"{money_input_raw//100}.{money_input_raw%100}"
+                    change_str=f"{change_raw//100}.{change_raw%100}"
+                    print(f"Money Inserted $"+money_input_str)
+                    print(f"Your change is $"+change_str)
+                    
+                           
         elif choice=="off":
             machine_on= False
             break
@@ -70,14 +93,6 @@ while machine_on:
 
 
 print("Turning off...")
-
-
-    # # ask for inputs
-    # input("How many quarters?: ")
-    # input("How many dimes?: ")
-    # input("How many nikels?: ")
-    # input("How many pennies?: ")
-    # print("Sorry that's not enough money. Money refunded.")
 
     # #provides change
     # print(f"Here is your {change} in change.")
