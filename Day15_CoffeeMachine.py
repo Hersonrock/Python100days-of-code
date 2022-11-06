@@ -74,15 +74,14 @@ while machine_on:
             if enough_resources(choice):
                 avail_resources=remaining_resources(choice)
                 money_input_raw=process_coins(choice)
+
                 if  money_input_raw != -1:
                     change_raw= money_input_raw- coffee_dic[choice]["price"]
                     #Building strings after handling amounts in cents.
                     money_input_str= f"{money_input_raw//100}.{money_input_raw%100}"
                     change_str=f"{change_raw//100}.{change_raw%100}"
                     print(f"Money Inserted $"+money_input_str)
-                    print(f"Your change is $"+change_str)
-                    
-                           
+                    print("Here is your change $"+change_str+", Enjoy")
         elif choice=="off":
             machine_on= False
             break
@@ -93,9 +92,3 @@ while machine_on:
 
 
 print("Turning off...")
-
-    # #provides change
-    # print(f"Here is your {change} in change.")
-
-    # #bye
-    # print("Here is your latte Enjoy!")
