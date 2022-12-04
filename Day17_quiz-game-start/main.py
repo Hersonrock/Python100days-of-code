@@ -29,7 +29,6 @@ while game_started:
         question["question"]=question["question"].replace("&#039;","'")
         question_bank.append(Question(question["question"],question["correct_answer"]))
 
-    print(question_bank[0].text)
     quiz=QuizBrain(question_bank)
 
     while quiz.still_has_question():
