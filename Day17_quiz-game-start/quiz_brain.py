@@ -5,6 +5,8 @@ class QuizBrain:
     score=0
     def __init__(self,questions):
         QuizBrain.question_list=questions
+        QuizBrain.question_number=0
+        QuizBrain.score=0
     def next_question(self):
 
         current_question = QuizBrain.question_list[QuizBrain.question_number]
@@ -22,5 +24,5 @@ class QuizBrain:
             QuizBrain.score +=1
         else:
             print ("That's wrong!")
-        print(f"The correct answer is {QuizBrain.question_list[QuizBrain.question_number-1].answer} ")
-        print(f"Score: {QuizBrain.score}/{QuizBrain.question_number} \n")
+        # print(f"The correct answer is {QuizBrain.question_list[QuizBrain.question_number-1].answer} ")
+        # print(f"Score: {QuizBrain.score}/{QuizBrain.question_number} \n")
