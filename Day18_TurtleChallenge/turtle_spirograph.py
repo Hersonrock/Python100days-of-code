@@ -1,8 +1,8 @@
-
 from turtle import Turtle,Screen
 import random
 
-step=40
+size=200
+circle_ammount=50
 
 
 #Basic start, a turtle and a screen that does not close inmediately.
@@ -11,23 +11,14 @@ screen.colormode(255)
 lechuga = Turtle()
 lechuga.shape("turtle")
 lechuga.speed(0)
-lechuga.pensize(10)
+lechuga.pensize(2)
 
 
-for n in range(1,201):
+for n in range (1,circle_ammount+1):
     lechuga.pencolor(random.randint(0,255),random.randint(0,255),random.randint(0,255))
-    rand_dir=random.randint(0,3)
-    
-    if rand_dir==0:
-        lechuga.forward(step)
-    if rand_dir==1:
-        lechuga.right(90)
-        lechuga.forward(step)
-    if rand_dir==3:
-        lechuga.left(90)
-        lechuga.forward(step)
-    if rand_dir==1:
-        lechuga.back(step)
+    lechuga.circle(size)
+    lechuga.right(360/circle_ammount)
+
 
 screen.screensize(600,800)
 screen.exitonclick()
