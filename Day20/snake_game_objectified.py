@@ -5,7 +5,7 @@ screen=Screen()
 screen.setup(width=600,height=600)
 screen.bgcolor("black")
 screen.title("Snek")
-# screen.tracer(0)
+screen.tracer(0)
 
 game_on=True
 last_loc=(0,0)
@@ -28,12 +28,12 @@ class Snake:
 
     segments=[]
 
-    def move(segments):
-        last_loc=segments[0].position()
-        for i in range(1,len(segments)):
+    def move(self):
+        last_loc=self.segments[0].position()
+        for i in range(1,len(self.segments)):
             new_loc=last_loc
-            last_loc=segments[i].position()
-            segments[i].goto(new_loc)
+            last_loc=self.segments[i].position()
+            self.segments[i].goto(new_loc)
         screen.update()
         time.sleep(0.1)    
 
@@ -44,8 +44,8 @@ print(f"{Snek.segments}")
 
 while game_on:
 
-    Snek.segments[0].forward(2)
-    # Snek.move() 
+    Snek.segments[0].forward(20)
+    Snek.move() 
     # TypeError: 'Snake' object is not subscriptable
 
 screen.exitonclick()
