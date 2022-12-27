@@ -6,7 +6,6 @@ screen.setup(width=600,height=600)
 screen.bgcolor("black")
 screen.title("Snek")
 screen.tracer(0)
-
 game_on=True
 last_loc=(0,0)
 screen.listen()
@@ -32,49 +31,39 @@ class Snake:
 
     def move(self):
         last_loc=self.head.position()
+        self.move_forwards()
         for i in range(1,len(self.segments)):
             new_loc=last_loc
             last_loc=self.segments[i].position()
             self.segments[i].goto(new_loc)
         screen.update()
         time.sleep(0.1) 
-        self.move_forwards() 
+        
 
     def move_forwards(self):
         self.head.forward(20)
 
-    #Code that cannot be used-------
+   
     def right(self):
         if self.head.heading()!=180:
             new_heading=0
             self.head.seth(new_heading)
-            self.head.forward(20)
-       
-        
     def left(self):
         if self.head.heading()!=0:
             new_heading=180
             self.head.seth(new_heading)
-            self.head.forward(20)
-       
-
+            
     def up(self):
         if self.head.heading()!=270: 
             new_heading=90
             self.head.seth(new_heading)
-            self.head.forward(20)
-        
-
+            
     def down(self):
         if self.head.heading()!=90:
             new_heading=270
             self.head.seth(new_heading)
-            self.head.forward(20)
+            
        
-
-
-
-
 Snek=Snake(starting_positions)
 
 while game_on:
