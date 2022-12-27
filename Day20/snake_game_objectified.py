@@ -16,6 +16,7 @@ class Snake:
 
     segments=[]
 
+
     def __init__(self,positions:list):
 
         for position in positions:
@@ -27,9 +28,10 @@ class Snake:
             snake_segment.penup()
             snake_segment.goto(position)
             snake_segment.showturtle()
+        self.head=self.segments[0]
 
     def move(self):
-        last_loc=self.segments[0].position()
+        last_loc=self.head.position()
         for i in range(1,len(self.segments)):
             new_loc=last_loc
             last_loc=self.segments[i].position()
@@ -39,31 +41,35 @@ class Snake:
         self.move_forwards() 
 
     def move_forwards(self):
-        self.segments[0].forward(20)
+        self.head.forward(20)
 
     #Code that cannot be used-------
     def right(self):
-        new_heading=0
-        self.segments[0].seth(new_heading)
-        self.segments[0].forward(20)
+        if self.head.heading()!=180:
+            new_heading=0
+            self.head.seth(new_heading)
+            self.head.forward(20)
        
         
     def left(self):
-        new_heading=180
-        self.segments[0].seth(new_heading)
-        self.segments[0].forward(20)
+        if self.head.heading()!=0:
+            new_heading=180
+            self.head.seth(new_heading)
+            self.head.forward(20)
        
 
-    def up(self): 
-        new_heading=90
-        self.segments[0].seth(new_heading)
-        self.segments[0].forward(20)
-       
+    def up(self):
+        if self.head.heading()!=270: 
+            new_heading=90
+            self.head.seth(new_heading)
+            self.head.forward(20)
+        
 
     def down(self):
-        new_heading=270
-        self.segments[0].seth(new_heading)
-        self.segments[0].forward(20)
+        if self.head.heading()!=90:
+            new_heading=270
+            self.head.seth(new_heading)
+            self.head.forward(20)
        
 
 
