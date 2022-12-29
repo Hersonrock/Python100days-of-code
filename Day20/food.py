@@ -2,24 +2,20 @@ from turtle import Turtle
 import random
 
 
-class Food():
+class Food(Turtle):
     def __init__(self):
-        self.position= (0,0)
+        super().__init__()
         self.create_food()
     
     def create_food(self):
-        food = Turtle(shape="circle")
-        food.color("blue")
-        food.shapesize(stretch_len=0.5,stretch_wid=0.5)
-        food.speed("fastest")
-        food.hideturtle()
-        food.penup()
-        food.goto(self.position)
-        food.showturtle()
-        self.entity=food
+        self.shape("circle")
+        self.penup()
+        self.shapesize(stretch_len=0.5,stretch_wid=0.5)
+        self.color("blue")
+        self.speed("fastest")
 
     def randomize_position(self):
-        self.position= (random.randint(-290,290),random.randint(-290,290))
+        self.randposition= (random.randint(-290,290),random.randint(-290,290))
         self.entity.hideturtle()
-        self.entity.goto(self.position)
+        self.entity.goto(self.randposition)
         self.entity.showturtle()
