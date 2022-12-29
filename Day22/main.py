@@ -14,10 +14,14 @@ screen.title("PONG")
 screen.tracer(0)
 # screen.tracer(0)  #Is necesary for animation control.
 game_on=True
+
+#-------Animation stuff---------
+#Had to play with the numbers to make it look "pretty"
 fps=55
 speed=500
 wait=(1/fps)
 frame_speed=speed/fps
+#/------------------------------
 
 ball=Ball()
 

@@ -3,7 +3,7 @@ import random
 
 SCREEN_HEIGHT=600
 SCREEN_WIDTH=600
-HEADING_CHANGE=20
+HEADING_CHANGE=50
 
 UP= 90
 DOWN=270
@@ -25,8 +25,10 @@ class Ball(Turtle):
             
 
     def bounce(self,touch,heading):
+        #Avoids perfect bounces, These should be practically impossible while on game.
         if heading==UP or heading==DOWN or heading==LEFT or heading==RIGHT:
             self.setheading(heading+random.randrange(-HEADING_CHANGE,HEADING_CHANGE,HEADING_CHANGE)+180)
+        
         elif(heading>0 and heading<90):
             if touch=="top":
                 self.setheading(heading-90)
@@ -53,22 +55,18 @@ class Ball(Turtle):
     def collision(self):
 
         if self.position()[0]>(SCREEN_WIDTH/2)-10:
-            #self.setheading(LEFT)
             self.color("red")
             self.touch="right"
             self.bounce(self.touch,self.heading())
         if self.position()[0]<-(SCREEN_WIDTH/2)+10:
-             #self.setheading(RIGHT)
             self.color("blue")
             self.touch="left"
             self.bounce(self.touch,self.heading())
         if self.position()[1]>(SCREEN_HEIGHT/2)-10:
-             #self.setheading(DOWN)
             self.color("green")
             self.touch="top"
             self.bounce(self.touch,self.heading())
         if self.position()[1]<-(SCREEN_HEIGHT/2)+10:
-             #self.setheading(UP)
             self.color("yellow")
             self.touch="bot"
             self.bounce(self.touch,self.heading())
