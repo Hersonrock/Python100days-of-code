@@ -1,8 +1,8 @@
 from turtle import Turtle
+from scoreboard import SCREEN_HEIGHT,SCREEN_WIDTH
 import random
 
-SCREEN_HEIGHT=600
-SCREEN_WIDTH=600
+
 HEADING_CHANGE=50
 
 UP= 90
@@ -25,30 +25,33 @@ class Ball(Turtle):
             
 
     def bounce(self,touch,heading):
+
+        clockwise=heading-90
+        counterclock=heading+90
         #Avoids perfect bounces, These should be practically impossible while on game.
         if heading==UP or heading==DOWN or heading==LEFT or heading==RIGHT:
             self.setheading(heading+random.randrange(-HEADING_CHANGE,HEADING_CHANGE,HEADING_CHANGE)+180)
         
         elif(heading>0 and heading<90):
             if touch=="top":
-                self.setheading(heading-90)
+                self.setheading(clockwise)
             if touch=="right":
-                self.setheading(heading+90)
+                self.setheading(counterclock)
         elif(heading>90 and heading<180):
             if touch=="top":
-                self.setheading(heading+90)
+                self.setheading(counterclock)
             if touch=="left":
-                self.setheading(heading-90)
+                self.setheading(clockwise)
         elif(heading>180 and heading<270):
             if touch=="bot":
-                self.setheading(heading-90)
+                self.setheading(clockwise)
             if touch=="left":
-                self.setheading(heading+90)
+                self.setheading(counterclock)
         elif(heading>270 and heading<360):
             if touch=="bot":
-                self.setheading(heading+90)
+                self.setheading(counterclock)
             if touch=="right":
-                self.setheading(heading-90)
+                self.setheading(clockwise)
              
         print(self.heading())
 
