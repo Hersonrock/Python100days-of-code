@@ -1,7 +1,8 @@
-from turtle import Turtle,Screen
+from turtle import Screen
 import time
 from snake import Snake
 from food import Food
+from scoreboard import Scoreboard
 
 
 screen=Screen()
@@ -11,8 +12,23 @@ screen.title("Snek")
 screen.tracer(0)  #Is necesary for animation control.
 game_on=True
 
+
+
+
 snek=Snake()
 food=Food()
+scoreboard=Scoreboard()
+
+def collision_check(snake,food):
+
+
+    if snek.head.distance(food)<15:
+        print("contact")
+        food.randomize_position()
+        scoreboard.clear()
+        scoreboard.increase_score()
+
+
 
 #----------Screen Input handling--------
 screen.listen()
@@ -26,10 +42,12 @@ screen.onkey(snek.down,"Down")
 #/--------------------------------------
 
 
+
 while game_on:
 
     screen.update()  #Update goes along with tracer for animation control. Especifies the time the screen is updated.
     time.sleep(0.1) 
     snek.move() 
+    collision_check(snek,food)
 
 screen.exitonclick()

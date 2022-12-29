@@ -15,7 +15,7 @@ class Food(Turtle):
         self.speed("fastest")
 
     def randomize_position(self):
-        self.randposition= (random.randint(-290,290),random.randint(-290,290))
-        self.entity.hideturtle()
-        self.entity.goto(self.randposition)
-        self.entity.showturtle()
+        self.randposition= (random.randrange(-290,290,10),random.randrange(-290,290,10))
+        self.hideturtle()
+        self.goto(self.randposition)
+        self.showturtle()
