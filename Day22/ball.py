@@ -1,10 +1,10 @@
 from turtle import Turtle
+
 # from main import SCREEN_HEIGHT,SCREEN_WIDTH
 
 SCREEN_HEIGHT=600
 SCREEN_WIDTH=600
 
-SPEED=20
 UP= 90
 DOWN=270
 LEFT=180
@@ -20,8 +20,8 @@ class Ball(Turtle):
         self.speed("fastest")
         self.setheading(RIGHT)
         
-    def move(self):
-        self.forward(SPEED)
+    def move(self,speed):
+        self.forward(speed)
 
     def collision(self):
 
