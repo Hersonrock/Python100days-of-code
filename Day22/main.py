@@ -30,6 +30,18 @@ ball=Ball()
 paddle1=Paddle(LOCATION_P1,3)
 paddle2=Paddle(LOCATION_P2,7)
 
+#----------Screen Input handling--------
+screen.listen()
+screen.onkey(paddle1.move_up,"w")
+screen.onkey(paddle1.move_down,"s")    
+screen.onkey(paddle2.move_up,"Up")
+screen.onkey(paddle2.move_down,"Down")    
+#I don't yet understand how this can be called while game is running on game loop. 
+#The logic of Screen.listen seems to be running in parallel?
+#In hindsight it makes more sense that Screen is always running and everything else is running as a child of it, but at the same time??
+#/--------------------------------------
+
+
 while game_on:
     ball.move(frame_speed)
     ball.collision()
