@@ -7,11 +7,13 @@ class Scoreboard(Turtle):
         self.hideturtle()
         self.goto(0,250)
         self.color("white")
-        self.write(f"Score: {self.score}",align="center",font=('Arial',24))
+        self.update_scoreboard()
         self.penup()
         
-        
+    def update_scoreboard(self):
+        self.clear()
+        self.write(f"Score: {self.score}",align="center",font=('Arial',24))
 
     def increase_score(self):
         self.score +=1
-        self.write(f"Score: {self.score}",align="center",font=('Arial',24))
+        self.update_scoreboard()

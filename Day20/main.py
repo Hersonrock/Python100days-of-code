@@ -25,7 +25,6 @@ def collision_check(snake,food):
     if snek.head.distance(food)<15:
         print("contact")
         food.randomize_position()
-        scoreboard.clear()
         scoreboard.increase_score()
 
 
