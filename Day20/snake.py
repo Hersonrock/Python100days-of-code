@@ -61,3 +61,21 @@ class Snake:
         if self.head.heading()!=90:
             self.head.seth(DOWN)
 #/-------------------------------------------------     
+
+    def add_segment(self):
+
+         #Initializes all segments and keeps turtle hidden.
+            segment=Turtle(shape="square")
+            segment.color("white")
+            segment.hideturtle()
+            segment.penup()
+            segment.goto(self.segments[-1].position())
+            segment.showturtle()
+
+            self.segments.append(segment) #A way to track segments and to keep them organized.
+
+    def detect_tail_collision(self):
+        for index in range(1,len(self.segments)-1):
+                if  self.head.distance(self.segments[index])<10:
+                    return True
+        return False

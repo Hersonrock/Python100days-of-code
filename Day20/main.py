@@ -27,6 +27,7 @@ def collision_check(food):
         print("contact")
         food.randomize_position()
         scoreboard.increase_score()
+        snek.add_segment()
 
 def boundary_check():
     if (snek.head.position()[0]>(SCREEN_WIDTH/2)-20) or (snek.head.position()[0]<-(SCREEN_WIDTH/2)+13) or (snek.head.position()[1]>(SCREEN_HEIGHT/2)-13) or (snek.head.position()[1]<-(SCREEN_HEIGHT/2)+20) :
@@ -65,7 +66,9 @@ while game_on:
     time.sleep(0.1) 
     snek.move() 
     collision_check(food)
-    game_on = boundary_check()
+
+
+    game_on = boundary_check() and not snek.detect_tail_collision()
 
 scoreboard.game_over()
 for segment in snek.segments:
