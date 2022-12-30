@@ -46,6 +46,7 @@ screen.listen()
 screen.onkey(turtle.move,"w")
 street_create()
 
+
 while game_on:
     
     screen.update()
@@ -55,4 +56,7 @@ while game_on:
         counter +=1
     else:
         counter=1
+
+    if counter%20==0:
+        cars.move_cars()
    
