@@ -64,14 +64,14 @@ class Ball(Turtle):
             # self.touch="right"
             # self.bounce(self.touch,self.heading())
             self.p2loss+=1
-            self.home()
+            self.goto(0,random.randint(-SCREEN_HEIGHT/2+20,SCREEN_HEIGHT/2-20))
             self.setheading(LEFT)
         if self.position()[0]<-(SCREEN_WIDTH/2):
             # self.color("blue")
             # self.touch="left"
             # self.bounce(self.touch,self.heading())
             self.p1loss+=1
-            self.home()
+            self.goto(0,random.randint(-SCREEN_HEIGHT/2+20,SCREEN_HEIGHT/2-20))
             self.setheading(RIGHT)
         if self.position()[1]>(SCREEN_HEIGHT/2)-10:
             self.color("green")
