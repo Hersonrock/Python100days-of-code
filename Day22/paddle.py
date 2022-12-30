@@ -40,3 +40,4 @@ class Paddle():
         for segment in self.segments:
             segment.seth(270)
             segment.forward(PADDLE_SPEED)
+    

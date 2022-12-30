@@ -19,6 +19,8 @@ class Ball(Turtle):
         self.shapesize(stretch_len=0.5,stretch_wid=0.5)
         self.speed("fastest")
         self.setheading(RIGHT)
+        self.p1loss=0
+        self.p2loss=0
         
     def move(self,speed):
         self.forward(speed)
@@ -57,14 +59,20 @@ class Ball(Turtle):
 
     def collision(self):
 
-        if self.position()[0]>(SCREEN_WIDTH/2)-10:
-            self.color("red")
-            self.touch="right"
-            self.bounce(self.touch,self.heading())
-        if self.position()[0]<-(SCREEN_WIDTH/2)+10:
-            self.color("blue")
-            self.touch="left"
-            self.bounce(self.touch,self.heading())
+        if self.position()[0]>(SCREEN_WIDTH/2):
+            # self.color("red")
+            # self.touch="right"
+            # self.bounce(self.touch,self.heading())
+            self.p2loss+=1
+            self.home()
+            self.setheading(LEFT)
+        if self.position()[0]<-(SCREEN_WIDTH/2):
+            # self.color("blue")
+            # self.touch="left"
+            # self.bounce(self.touch,self.heading())
+            self.p1loss+=1
+            self.home()
+            self.setheading(RIGHT)
         if self.position()[1]>(SCREEN_HEIGHT/2)-10:
             self.color("green")
             self.touch="top"
