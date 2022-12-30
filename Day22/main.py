@@ -9,7 +9,6 @@ LOCATION_P2=(-27+SCREEN_WIDTH/2,0)
 SCOREBOARD_POS_P1=(-40,SCREEN_HEIGHT/2-80)
 SCOREBOARD_POS_P2=(40,SCREEN_HEIGHT/2-80)
 
-
 screen=Screen()
 screen.setup(width=SCREEN_WIDTH,height=SCREEN_HEIGHT)
 screen.bgcolor("black")
@@ -24,7 +23,13 @@ def create_divider():
     divider.penup()
     divider.goto((0,SCREEN_HEIGHT/2))
     divider.pendown()
-    divider.goto((0,-SCREEN_HEIGHT/2))
+    divider.seth(270)
+    while (divider.position()[1]>-SCREEN_HEIGHT/2):
+        divider.pendown()
+        divider.forward(10)
+        divider.penup()
+        divider.forward(10)
+        
 
 #-------Animation stuff---------
 #Had to play with the numbers to make it look "pretty"
@@ -70,14 +75,14 @@ while game_on:
                   
 
     if ball.p1loss<20 and ball.p2loss<20:
-        scoreboard1.increase_score(ball.p1loss)
-        scoreboard2.increase_score(ball.p2loss)
+        scoreboard1.increase_score(ball.p2loss)
+        scoreboard2.increase_score(ball.p1loss)
+        
     else:
         game_on=False
         scoreboard1.game_over()
         
     time.sleep(wait)
     
-
 
 screen.exitonclick()
