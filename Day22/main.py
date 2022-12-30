@@ -60,6 +60,22 @@ while game_on:
     ball.collision()
     screen.update()
 
+    for segment in paddle1.segments:
+        if segment.distance(ball)<10:
+            ball.paddle_bounce("p1")
+
+    for segment in paddle2.segments:
+        if segment.distance(ball)<10:
+            ball.paddle_bounce("p2")
+                  
+
+    if ball.p1loss<20 and ball.p2loss<20:
+        scoreboard1.increase_score(ball.p1loss)
+        scoreboard2.increase_score(ball.p2loss)
+    else:
+        game_on=False
+        scoreboard1.game_over()
+        
     time.sleep(wait)
     
 

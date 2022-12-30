@@ -81,6 +81,16 @@ class Ball(Turtle):
             self.color("yellow")
             self.touch="bot"
             self.bounce(self.touch,self.heading())
+            
+    def paddle_bounce(self,paddle):
+        if paddle=="p1":
+            self.color("red")
+            self.touch="left"
+            self.bounce(self.touch,self.heading())
+        if paddle=="p2":
+            self.color("blue")
+            self.touch="right"
+            self.bounce(self.touch,self.heading())
 
 
     
