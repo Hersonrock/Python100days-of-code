@@ -1,5 +1,5 @@
 from turtle import Turtle
-from scoreboard import SCREEN_HEIGHT,SCREEN_WIDTH,START
+from scoreboard import START
 
 SPEED=10
 
@@ -17,3 +17,8 @@ class TurtleCross(Turtle):
 
     def move(self):
         self.forward(SPEED)
+
+    def reset(self):
+        self.hideturtle()
+        self.goto(START)
+        self.showturtle()

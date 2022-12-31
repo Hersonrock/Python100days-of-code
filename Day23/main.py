@@ -7,6 +7,7 @@ import random
 import time
 
 CAR_AMMOUNT=20
+LEVEL_FACTOR=0.2
 relative_speed=70
 global_speed=SCREEN_WIDTH/relative_speed
 
@@ -24,7 +25,7 @@ def street_create():
 
 game_on=True
 game_init=True
-counter=1
+level=0
 
 screen=Screen()
 screen.setup(width=SCREEN_WIDTH,height=SCREEN_HEIGHT)
@@ -47,7 +48,13 @@ while game_on:
         cars.move_init()
         game_init=False
     else: 
-        cars.move(global_speed)
+        if turtle.ycor()>SCREEN_HEIGHT/2-100:
+            turtle.reset()
+            scoreboard.increase_level()
+            level+=1
+            
+            
+        cars.move(global_speed+LEVEL_FACTOR*global_speed*level)
         cars.reset_car()
         time.sleep(0.1)
         screen.update()

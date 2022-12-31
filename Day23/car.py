@@ -15,12 +15,7 @@ class Car (Turtle):
         self.hideturtle()
         self.goto(SCREEN_WIDTH/2+40,y_pos)
         self.showturtle()
-
-    def rand_color(self):
-        random_index=random.randint(0,4)
-        color=COLORS[random_index]
-        self.color(color)
-
+        
     def move(self,speed):
         self.forward(speed)
 
