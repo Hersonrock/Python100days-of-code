@@ -6,6 +6,9 @@ from cars import Cars
 import random
 import time
 
+CAR_AMMOUNT=20
+relative_speed=70
+global_speed=SCREEN_WIDTH/relative_speed
 
 def street_create():
     painter=Turtle()
@@ -19,9 +22,8 @@ def street_create():
     painter.pendown()
     painter.forward(SCREEN_WIDTH)
 
-
-
 game_on=True
+game_init=True
 counter=1
 
 screen=Screen()
@@ -30,33 +32,23 @@ screen.bgcolor("white")
 screen.title("Turtle Cross")
 screen.tracer(0)
 
-# def rand_y():
-#     y_position=random.randint(-SCREEN_HEIGHT/2+110,SCREEN_HEIGHT/2-110)
-
-#     return y_position
-
 turtle=TurtleCross()
 scoreboard=Scoreboard()
 cars=Cars()
 
-for i in range(1,21):
-    cars.create_traffic()
-
+cars.create_traffic(CAR_AMMOUNT)
 screen.listen()
 screen.onkey(turtle.move,"w")
 street_create()
 
-
 while game_on:
     
-    screen.update()
-    cars.move()
-    time.sleep(0.1)
-    if counter<100:
-        counter +=1
-    else:
-        counter=1
-
-    if counter%20==0:
-        cars.move_cars()
-   
+    if game_init: 
+        cars.move_init()
+        game_init=False
+    else: 
+        cars.move(global_speed)
+        cars.reset_car()
+        time.sleep(0.1)
+        screen.update()
+    
