@@ -53,9 +53,15 @@ while game_on:
             scoreboard.increase_level()
             level+=1
             
-            
         cars.move(global_speed+LEVEL_FACTOR*global_speed*level)
         cars.reset_car()
+        if turtle.collision(cars):
+            scoreboard.game_over()
+            turtle.reset()
+            screen.update()
+            time.sleep(2)
+            scoreboard.reset_scoreboard()
+            level=0
         time.sleep(0.1)
         screen.update()
     

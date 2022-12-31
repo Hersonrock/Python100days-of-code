@@ -30,3 +30,8 @@ class Scoreboard(Turtle):
     def game_over(self):
         self.goto(0,0)
         self.write(f"Game Over",align=ALIGNMENT,font=FONT)
+
+    def reset_scoreboard(self):
+        self.goto(-SCREEN_WIDTH/2+80,SCREEN_HEIGHT/2-40)
+        self.level=0
+        self.update_scoreboard()
