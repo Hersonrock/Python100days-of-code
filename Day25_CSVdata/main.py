@@ -17,4 +17,12 @@
 import pandas
 
 data = pandas.read_csv("Day25_CSVdata\weather_data.csv")
-print(data["temp"])
+temp_list=data["temp"].to_list()
+
+temp_sum=0
+
+print(data["temp"].mean())
+print(data["temp"].max())
+
+# temp_sum=sum(temp_list)
+# print(f"average temp: {temp_sum/len(temp_list)}")
