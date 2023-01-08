@@ -5,7 +5,11 @@
 
 import csv
 
+temperatures=[]
 with open ("Day25_CSVdata\weather_data.csv") as data_file:
     data= csv.reader(data_file)
     for row in data:
-        print(row) 
+        if row[1]!="temp":
+            temperatures.append(int(row[1]))
+
+print(temperatures)
