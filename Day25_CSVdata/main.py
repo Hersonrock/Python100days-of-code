@@ -3,13 +3,18 @@
 #     print(data)
 
 
-import csv
+# import csv
 
-temperatures=[]
-with open ("Day25_CSVdata\weather_data.csv") as data_file:
-    data= csv.reader(data_file)
-    for row in data:
-        if row[1]!="temp":
-            temperatures.append(int(row[1]))
+# temperatures=[]
+# with open ("Day25_CSVdata\weather_data.csv") as data_file:
+#     data= csv.reader(data_file)
+#     for row in data:
+#         if row[1]!="temp":
+#             temperatures.append(int(row[1]))
 
-print(temperatures)
+# print(temperatures)
+
+import pandas
+
+data = pandas.read_csv("Day25_CSVdata\weather_data.csv")
+print(data["temp"])
