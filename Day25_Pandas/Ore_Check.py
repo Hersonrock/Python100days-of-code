@@ -7,7 +7,7 @@ from datetime import datetime ,timezone
 #reading https://towardsdatascience.com/how-to-parse-json-data-with-python-pandas-f84fbd0b1025
 
 LOCATIONS=["Bridgewatch","Lymhurst","Fort Sterling","Thetford","Martlock"]
-FILE=".\Day25_Pandas\\Ores.txt"
+FILE=".\Day25_Pandas\\resources.txt"
 EXCLUDED_QUALITY=["@4","@3","@2","@1"]
 EXCLUDED_TIER=["T8","T7","T6"]
 
