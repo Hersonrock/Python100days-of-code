@@ -2,6 +2,7 @@ from Request_Get import Get_Request
 import pprint
 from prettytable import PrettyTable
 import pandas as pd
+from datetime import datetime ,timezone
 
 #reading https://towardsdatascience.com/how-to-parse-json-data-with-python-pandas-f84fbd0b1025
 
@@ -24,12 +25,25 @@ def best_trip(data,item):
     city_max=data[data.sell_price_min==value_max].city
     # date_min=data[data.sell_price_min==value_min].sell_price_min_date
     # date_max=data[data.sell_price_min==value_max].sell_price_min_date
+    date_min=datetime.strptime(data[data.sell_price_min==value_min].sell_price_min_date.values[0],'%Y-%m-%dT%H:%M:%S' )
+    date_max=datetime.strptime(data[data.sell_price_min==value_max].sell_price_min_date.values[0],'%Y-%m-%dT%H:%M:%S' )
+    now= datetime.now(timezone.utc)
+    if date_min > date_max:
+        date=date_max
+    elif date_min < date_max:
+        date=date_min
+    else:
+        date=date_min
+
+    date=datetime(date.year,date.month,date.day,date.hour,date.minute,tzinfo=timezone.utc)
+
+    difference= now - date
 
 
     if value_min >0:
-
         # response= f"{item}  {city_min.values[0]}({value_min})-->{city_max.values[0]}({value_max}) {value_max-value_min}"
-        response= [item, f"{city_min.values[0]}({value_min})-->{city_max.values[0]}({value_max})", value_max-value_min]
+        response= [item, f"{city_min.values[0]}({value_min})-->{city_max.values[0]}({value_max})", value_max-value_min, difference.seconds // 3600] 
+        # response= [item, f"{city_min.values[0]}({value_min})-->{city_max.values[0]}({value_max})", value_max-value_min, date] 
     else:
         response=[item, "Update Needed", 0]
 
@@ -76,7 +90,7 @@ data= pd.json_normalize(raw_response)
 
 
 table=PrettyTable()
-table.field_names=["item_id","trip","profit"]
+table.field_names=["item_id","trip","profit","hour_offset"]
 
 for item in item_list:
     if best_trip(data,item)[1]!="Update Needed":
@@ -86,11 +100,12 @@ for item in item_list:
 table.sortby="profit"
 table.reversesort = True
 
-print(data[data.item_id=="T2_ORE"])
+
 print(table)
 
 
 #--------------------Debug--------------------------
+#print(data[data.item_id=="T2_ORE"])
 #pprint.pprint(response)
 #/--------------------Debug--------------------------
  
