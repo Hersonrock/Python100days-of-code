@@ -103,6 +103,8 @@ for ex_quality in EXCLUDED_QUALITY:
             if (ex_quality in item and ex_tier in item)or "T5" in item and "@3" in item:
                 item_list.remove(item)
 
+
+
             
 raw_response= make_request(item_list)
 data= pd.json_normalize(raw_response)
