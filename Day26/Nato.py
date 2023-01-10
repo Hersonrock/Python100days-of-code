@@ -32,4 +32,14 @@ import pandas as pd
 nato=pd.read_csv("Day26\\nato_phonetic_alphabet.csv")
 
 nato_dic ={row.letter:row.code for (index,row) in nato.iterrows()}
-print(nato_dic)
+#-------Debug-------
+# print(nato_dic)
+
+word = input("Enter a word: ").upper()
+
+#My first attempt I was taking the inverse approach of going trough the dic to match the list , instead of going through the list to match the dic
+#response= [ code for (letter,code) in nato_dic.items() if letter.lower() in word_list ]
+
+response = [ nato_dic[letter] for letter in word]
+
+print(response)
