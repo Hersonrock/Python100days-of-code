@@ -29,3 +29,19 @@ def calculate(**kwargs):
     print(kwargs) #this will print a dictionary
 
 calculate(add=4,multiply=9)
+
+#class example for kwarg
+
+class Car:
+
+    def __init__(self,**kwarg):
+
+        #This code will not work if the below is used, .get() must be used instead so the arguments are trully optional.
+        # self.model=kwarg["model"]
+        # self.year=kwarg["year"]
+        self.model=kwarg.get("model")
+        self.year=kwarg.get("year")
+ 
+spiner=Car(model="spiner")
+
+print(f"model ={spiner.model},year={spiner.year}") #It returns "None" for year, thanks to .get().
