@@ -9,15 +9,20 @@ window.minsize(width=800,height=600)
 my_label=Label(text="Label", font=("Arial",24,"bold"))
 my_label.pack()  # "Packer" this is needed for the label to display
 
+
+
+#------To create an input form
+
+def print_input():
+    print(input.get())
+
+input=Entry(width=50)
+input.pack()
+
 #----To create a Button
 
-def button_clicked():
-    print("auch")
-    my_label.config(text="auch")
-
-button=Button(text="Click on me", command=button_clicked)
+button=Button(text="Click on me", command=print_input)
 button.pack()
-
 
 #----------This should be at the end of program.
 window.mainloop()
