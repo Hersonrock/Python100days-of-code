@@ -10,14 +10,19 @@ my_label=Label(text="Label", font=("Arial",24,"bold"))
 my_label.pack()  # "Packer" this is needed for the label to display
 
 #----To create a Button
-button=Button(text="Click on me")
+
+def button_clicked():
+    print("auch")
+    my_label.config(text="auch")
+
+button=Button(text="Click on me", command=button_clicked)
 button.pack()
-
-
 
 
 #----------This should be at the end of program.
 window.mainloop()
+
+
 
 
 
