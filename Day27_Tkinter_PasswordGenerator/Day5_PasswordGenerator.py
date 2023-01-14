@@ -4,11 +4,14 @@ import random
 
 window = Tk()
 window.title("Password Generator")
-window.minsize(width=500,height=300)
+window.minsize(width=600,height=300)
 
 LETTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 NUMBERS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 SYMBOLS = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+ENTRY_PAD=30
+LABEL_PAD=5
+BASE_FONT=("Arial",10)
 
 def build_pass(nr_letters,nr_symbols,nr_numbers):
     totalCharacters= range(1,nr_letters+nr_symbols+nr_numbers+1)
@@ -36,51 +39,57 @@ def print_password():
     nr_letters=int(letter_entry.get())
     nr_symbols =int(symbols_entry.get())
     nr_numbers = int(numbers_entry.get())
-    #Building password out of content choosen and printing as a label.
+
+    #Building password
     password="".join(build_pass(nr_letters,nr_symbols,nr_numbers))
-    # password_ouput="Your password is: "+"".join(password)
-    output_label=Label(text="Your password is:",font=("Arial",10))
-    output_label.grid(column=0,row=7,sticky="w")
-    output=Entry(width=100)
+
+    #Configuring output Label and entry
+    output_label=Label(text="Your password is:",font=BASE_FONT)
+    output_label.grid(column=0,row=8,sticky="w",padx=LABEL_PAD)
+    output=Entry(width=85)
     output.insert(END,string=password)
-    output.grid(column=0,row=8,sticky="w")
+    output.grid(column=0,row=9,sticky="w",padx=ENTRY_PAD)
+
+    #Changes button text
+    print_pass_btn.config(text="Regenerate")
+
 
 
 # print("Welcome to the PyPassword Generator!")
 welcome=Label(text="Welcome to the PyPassword Generator!", font=("Arial",15,))
-welcome.grid(column=0,row=0)
+welcome.grid(column=0,row=0,sticky="n")
 welcome.config(padx=20,pady=20)
 
 # Changing console input to Label+Entry
 # nr_letters= int(input("How many letters would you like in your password?\n")) 
-letter_label=Label(text="How many letters would you like in your password?",font=("Arial",10))
+letter_label=Label(text="How many letters would you like in your password?",font=BASE_FONT)
 letter_label.grid(column=0,row=1,sticky="w")
-letter_label.config(padx=5,pady=5)
+letter_label.config(padx=LABEL_PAD,pady=LABEL_PAD)
 letter_entry=Entry(width=5)
 letter_entry.insert(END,string=len(LETTERS))
-letter_entry.grid(column=0,row=2,sticky="w",padx=30)
+letter_entry.grid(column=0,row=2,sticky="w",padx=ENTRY_PAD)
 
 # Changing console input to Label+Entry
 # nr_symbols = int(input(f"How many symbols would you like?\n"))
-symbols_label=Label(text="How many symbols would you like?", font=("Arial",10))
+symbols_label=Label(text="How many symbols would you like?", font=BASE_FONT)
 symbols_label.grid(column=0,row=3,sticky="w")
-symbols_label.config(padx=5,pady=5)
+symbols_label.config(padx=LABEL_PAD,pady=LABEL_PAD)
 symbols_entry=Entry(width=5)
 symbols_entry.insert(END,string=len(SYMBOLS))
-symbols_entry.grid(column=0,row=4,sticky="w",padx=30)
+symbols_entry.grid(column=0,row=4,sticky="w",padx=ENTRY_PAD)
 
 # Changing console input to Label+Entry
 #nr_numbers = int(input(f"How many numbers would you like?\n"))
-numbers_label=Label(text="How many numbers would you like?",font=("Arial",10))
+numbers_label=Label(text="How many numbers would you like?",font=BASE_FONT)
 numbers_label.grid(column=0,row=5,sticky="w")
-numbers_label.config(padx=5,pady=5)
+numbers_label.config(padx=LABEL_PAD,pady=LABEL_PAD)
 numbers_entry=Entry(width=5)
 numbers_entry.insert(END,string=len(NUMBERS))
-numbers_entry.grid(column=0,row=6,sticky="w",padx=30)
+numbers_entry.grid(column=0,row=6,sticky="w",padx=ENTRY_PAD)
 
 #Definining Button and function
 print_pass_btn=Button(text="Print Password",command=print_password)
-print_pass_btn.grid(column=1,row=0)
+print_pass_btn.grid(column=0,row=7,sticky="n")
 
 
 window.mainloop()
