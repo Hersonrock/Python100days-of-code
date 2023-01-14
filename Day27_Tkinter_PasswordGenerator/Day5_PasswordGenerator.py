@@ -11,9 +11,17 @@ numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
 # print("Welcome to the PyPassword Generator!")
-welcome=Label(text="Welcome to the PyPassword Generator!", font=("Arial",24,))
+welcome=Label(text="Welcome to the PyPassword Generator!", font=("Arial",15,))
 welcome.grid(column=0,row=0)
 welcome.config(padx=20,pady=20)
+
+
+letter_label=Label(text="How many letters would you like in your password?",font=("Arial",10))
+letter_label.grid(column=0,row=1)
+letter_label.config(padx=20,pady=20)
+letter_entry=Entry(width=20)
+letter_entry.insert(END,string=f"From 1 to {len(letters)}")
+letter_entry.grid(column=0,row=2)
 
 
 nr_letters= int(input("How many letters would you like in your password?\n")) 
