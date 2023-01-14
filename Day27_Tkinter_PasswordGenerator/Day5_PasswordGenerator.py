@@ -37,10 +37,13 @@ def print_password():
     nr_symbols =int(symbols_entry.get())
     nr_numbers = int(numbers_entry.get())
     #Building password out of content choosen and printing as a label.
-    password=build_pass(nr_letters,nr_symbols,nr_numbers)
-    password_ouput="Your password is: "+"".join(password)
-    output=Label(text=password_ouput,font=("Arial",10))
-    output.grid(column=0,row=7,sticky="w")
+    password="".join(build_pass(nr_letters,nr_symbols,nr_numbers))
+    # password_ouput="Your password is: "+"".join(password)
+    output_label=Label(text="Your password is:",font=("Arial",10))
+    output_label.grid(column=0,row=7,sticky="w")
+    output=Entry(width=100)
+    output.insert(END,string=password)
+    output.grid(column=0,row=8,sticky="w")
 
 
 # print("Welcome to the PyPassword Generator!")
