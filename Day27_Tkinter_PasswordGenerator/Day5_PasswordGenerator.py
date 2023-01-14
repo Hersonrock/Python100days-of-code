@@ -40,7 +40,7 @@ def print_password():
     password=build_pass(nr_letters,nr_symbols,nr_numbers)
     password_ouput="Your password is: "+"".join(password)
     output=Label(text=password_ouput,font=("Arial",10))
-    output.grid(column=0,row=7)
+    output.grid(column=0,row=7,sticky="w")
 
 
 # print("Welcome to the PyPassword Generator!")
@@ -51,29 +51,29 @@ welcome.config(padx=20,pady=20)
 # Changing console input to Label+Entry
 # nr_letters= int(input("How many letters would you like in your password?\n")) 
 letter_label=Label(text="How many letters would you like in your password?",font=("Arial",10))
-letter_label.grid(column=0,row=1)
+letter_label.grid(column=0,row=1,sticky="w")
 letter_label.config(padx=5,pady=5)
 letter_entry=Entry(width=5)
 letter_entry.insert(END,string=len(LETTERS))
-letter_entry.grid(column=0,row=2)
+letter_entry.grid(column=0,row=2,sticky="w",padx=30)
 
 # Changing console input to Label+Entry
 # nr_symbols = int(input(f"How many symbols would you like?\n"))
 symbols_label=Label(text="How many symbols would you like?", font=("Arial",10))
-symbols_label.grid(column=0,row=3)
+symbols_label.grid(column=0,row=3,sticky="w")
 symbols_label.config(padx=5,pady=5)
 symbols_entry=Entry(width=5)
 symbols_entry.insert(END,string=len(SYMBOLS))
-symbols_entry.grid(column=0,row=4)
+symbols_entry.grid(column=0,row=4,sticky="w",padx=30)
 
 # Changing console input to Label+Entry
 #nr_numbers = int(input(f"How many numbers would you like?\n"))
 numbers_label=Label(text="How many numbers would you like?",font=("Arial",10))
-numbers_label.grid(column=0,row=5)
+numbers_label.grid(column=0,row=5,sticky="w")
 numbers_label.config(padx=5,pady=5)
 numbers_entry=Entry(width=5)
 numbers_entry.insert(END,string=len(NUMBERS))
-numbers_entry.grid(column=0,row=6)
+numbers_entry.grid(column=0,row=6,sticky="w",padx=30)
 
 #Definining Button and function
 print_pass_btn=Button(text="Print Password",command=print_password)
