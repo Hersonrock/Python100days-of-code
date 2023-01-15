@@ -4,7 +4,7 @@ FONT=("Arial",10)
 
 window= Tk()
 window.title("Miles to KM converter")
-window.minsize(width=200,height=200)
+window.minsize(width=200,height=100)
 
 def to_km():
 
