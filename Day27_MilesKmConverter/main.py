@@ -10,7 +10,7 @@ def to_km():
 
     result_label2.delete(0,END)
     miles=int(entry_label1.get())
-    result_label2.insert(END,string=f"{round(miles/1.6,2)}")
+    result_label2.insert(END,string=f"{round(miles*1.609,2)}")
     
 
 # label_main= Label(text="Miles to Km converter",font=("Arial",20))
