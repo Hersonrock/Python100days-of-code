@@ -20,18 +20,18 @@ LONG_BREAK_MIN = 20
 # ---------------------------- UI SETUP ------------------------------- #
 
 window=Tk()
-window.config(padx=100,pady=50)
+window.config(padx=100,pady=50,bg=YELLOW)
 window.title("Pomodoro")
 
 
 #-----------Canvas creation--------------------------------
-canvas= Canvas(width=202,height=223)   #Matching image dimentions.Any other dimention will crop the image 
+canvas= Canvas(width=201,height=223,bg=YELLOW, highlightthickness=0)   #Matching image dimentions.Any other dimention will crop the image 
 tomato_img=PhotoImage(file="Day28_Pomodoro\\tomato.png") #This is a special object used by canvas.
-canvas.create_image(103,112, image=tomato_img)  # This coordinates depict the center of the image.
+canvas.create_image(100,112, image=tomato_img)  # This coordinates depict the center of the image.
 canvas.grid(column=0,row=0)
+canvas.create_text(100,130, text="00:00",fill="white", font=(FONT_NAME,35,"bold"))
+
 #/--------------------------------------------------------
-
-
 
 
 
