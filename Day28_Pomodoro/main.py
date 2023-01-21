@@ -11,36 +11,48 @@ FONT_NAME = "Courier"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
+reps= 0
+timer=None
 
 # ---------------------------- TIMER RESET ------------------------------- # 
 
 def reset_timer():
-    pass
+    global reps
+    reps=0
+    window.after_cancel(timer)
+    canvas.itemconfig(timer_text,text="00:00")
+    timer_label.config(text="Timer",fg=GREEN)
+    checkmark_label.config(text="")
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
 def start_timer():
-    minutes=5
-    seconds= minutes*60
-    count_down(seconds)
+    
+    global reps
+    reps+=1
 
+    work_sec= WORK_MIN*60
+    work_break_sec= SHORT_BREAK_MIN*60
+    long_break_sec= LONG_BREAK_MIN*60
+
+
+    if reps%8==0:
+        count_down(long_break_sec)
+        timer_label.config(text="Long Break",fg=RED)
+    if reps%2==0:
+        count_down(work_break_sec)
+        timer_label.config(text="Short Break",fg=PINK)
+    else:
+        count_down(work_sec)
+        timer_label.config(text="Work",fg=GREEN)
+    
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
 
 def count_down(count):
 
-
-    #Solution using ceil? Looks more complicated.
-    # minutes_div=count/60
-    # if minutes_div<1:
-    #     minutes=0
-    # else:
-    #     minutes=int(math.ceil(minutes_div))
-    # seconds=int(math.ceil(count%60))
-
-
+    global timer
     minutes=math.floor(count/60)
     seconds=count%60
-
 
     if minutes<10:
         if seconds<10:
@@ -53,20 +65,24 @@ def count_down(count):
         if seconds>=10:
             display_text=str(minutes)+":"+str(seconds)
 
-
     canvas.itemconfig(timer_text,text=display_text)
 
     if count>0:
-        window.after(1000,count_down,count-1)
-        print(f"minutes= {minutes}")
-        print(f"seconds= {seconds}")
+        timer=window.after(1000,count_down,count-1)
+    else: 
+        start_timer()
+        mark=""
+        work_sessions= math.floor(reps/2)
+        for _ in range(work_sessions):
+            mark += "✔"
+        checkmark_label.config(text=mark)
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 
 window=Tk()
 window.config(padx=100,pady=10,bg=YELLOW)
 window.title("Pomodoro")
-
 
 
 # ---------------------------- CANVAS------------------------------- #
@@ -78,12 +94,10 @@ canvas.grid(column=1,row=2)
 timer_text = canvas.create_text(100,160, text="00:00",fill="white", font=(FONT_NAME,35,"bold"))
 
 
-
-
-timer_label=Label(text="Timer",fg=GREEN,font=(FONT_NAME,38),bg=YELLOW)
+timer_label=Label(text="Timer",fg=GREEN,font=(FONT_NAME,38,"bold"),bg=YELLOW)
 timer_label.grid(column=1,row=1)
 
-checkmark_label=Label(text="✔",fg=GREEN,font=(FONT_NAME,15,"bold"),bg=YELLOW)
+checkmark_label=Label(text="",fg=GREEN,font=(FONT_NAME,15,"bold"),bg=YELLOW)
 checkmark_label.grid(column=1,row=3)
 
 
@@ -92,12 +106,10 @@ checkmark_label.grid(column=1,row=3)
 
 # ---------------------------- Button ------------------------------- #
 
-start_timer=Button(text="Start",command=start_timer,highlightthickness=0)
-start_timer.grid(column=0,row=3,sticky="w")
-reset_timer=Button(text="Reset",command=reset_timer,highlightthickness=0)
-reset_timer.grid(column=2,row=3,sticky="e")
-
-
+start_timer_btn=Button(text="Start",command=start_timer,highlightthickness=0)
+start_timer_btn.grid(column=0,row=3,sticky="w")
+reset_timer_btn=Button(text="Reset",command=reset_timer,highlightthickness=0)
+reset_timer_btn.grid(column=2,row=3,sticky="e")
 
 
 window.mainloop()
