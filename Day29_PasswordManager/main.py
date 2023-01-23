@@ -1,14 +1,33 @@
 from tkinter import *
+from PasswordGenerator import password_gen
+
+LETTER=4
+SYMBOLS=4
+NUMBERS=4
+password=""
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 def generate_pass():
-    pass
+    global password
+    password_entry.delete(0, END)
+    password=password_gen(LETTER,SYMBOLS,NUMBERS)
+    password_entry.insert(END,string=password)
+   
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
-def add():
-    pass
+def add_to_file():
+
+    webpage= website_entry.get()
+    username= email_entry.get()
+
+    entry="".join(f"{webpage} | {username} | {password}\n")
+
+    score_file = open("Day29_PasswordManager\database.txt",mode="a")
+    score_file.write(entry)
+    score_file.close()
+
 
 # ---------------------------- UI SETUP ------------------------------- #
 window=Tk()
@@ -45,7 +64,7 @@ password_entry=Entry(width=32)
 password_entry.grid(column=1,row=3,sticky="w")
 
 #row 4
-add_btn=Button(text="Add",command=add,width=43)
+add_btn=Button(text="Add",command=add_to_file,width=43)
 add_btn.grid(column=1,row=4,columnspan=2)
 
 
