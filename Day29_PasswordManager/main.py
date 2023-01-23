@@ -1,16 +1,15 @@
 from tkinter import *
+from tkinter import messagebox
 from PasswordGenerator import password_gen
 
 LETTER=4
 SYMBOLS=4
 NUMBERS=4
-password=""
-
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 def generate_pass():
-    global password
+    password=""
     password_entry.delete(0, END)
     password=password_gen(LETTER,SYMBOLS,NUMBERS)
     password_entry.insert(END,string=password)
@@ -21,12 +20,18 @@ def add_to_file():
 
     webpage= website_entry.get()
     username= email_entry.get()
+    password= password_entry.get()
 
-    entry=f"{webpage} | {username} | {password}\n"
+    if webpage=="" or username =="" or password=="":
+        messagebox.showwarning(title="Warning",message="Please complete the fields.")
+    else:
 
-    score_file = open("Day29_PasswordManager\database.txt",mode="a")
-    score_file.write(entry)
-    score_file.close()
+        entry=f"{webpage} | {username} | {password}\n"
+        score_file = open("Day29_PasswordManager\database.txt",mode="a")
+        score_file.write(entry)
+        score_file.close()
+        password_entry.delete(0, END)
+        
 
 
 # ---------------------------- UI SETUP ------------------------------- #
