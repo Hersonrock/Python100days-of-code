@@ -35,11 +35,24 @@ nato_dic ={row.letter:row.code for (index,row) in nato.iterrows()}
 #-------Debug-------
 # print(nato_dic)
 
-word = input("Enter a word: ").upper()
+
+
+error=False
+
+while error==False:
+    try:
+        word = input("Enter a word: ").upper()
+        response = [ nato_dic[letter] for letter in word]
+    except KeyError:
+        print("Word can only contain letters in the alphabet")
+    else:
+        error=True
+
+
 
 #My first attempt I was taking the inverse approach of going trough the dic to match the list , instead of going through the list to match the dic
 #response= [ code for (letter,code) in nato_dic.items() if letter.lower() in word_list ]
 
-response = [ nato_dic[letter] for letter in word]
+
 
 print(response)
