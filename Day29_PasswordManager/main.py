@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from PasswordGenerator import password_gen
+import pyperclip
 
 LETTER=4
 SYMBOLS=4
@@ -13,6 +14,8 @@ def generate_pass():
     password_entry.delete(0, END)
     password=password_gen(LETTER,SYMBOLS,NUMBERS)
     password_entry.insert(END,string=password)
+    pyperclip.copy(password)
+    write_label("Copied to Clipboard...")
    
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 
@@ -26,13 +29,18 @@ def add_to_file():
         messagebox.showwarning(title="Warning",message="Please complete the fields.")
     else:
 
-        is_ok=messagebox.askokcancel(title="Save to file",message=f"Webpage:\t{webpage}\nUsername/Email:\t{username}\nPassword:\t{password}\nPress ok to continue... ")
+        is_ok=messagebox.askokcancel(title="Save to file",message=f"Webpage:\t{webpage}\nUsername/Email:\t{username}\nPassword:\t{password}\nPress OK to continue... ")
         if is_ok:
             entry=f"{webpage} | {username} | {password}\n"
             score_file = open("Day29_PasswordManager\database.txt",mode="a")
             score_file.write(entry)
             score_file.close()
             password_entry.delete(0, END)
+            
+
+def write_label(entry):
+    output_label=Label(text=entry,bg="white")
+    output_label.grid(column=1,row=5,sticky="w")
 
 
 
@@ -74,6 +82,8 @@ password_entry.grid(column=1,row=3,sticky="w")
 #row 4
 add_btn=Button(text="Add",command=add_to_file,width=43)
 add_btn.grid(column=1,row=4,columnspan=2)
+
+
 
 
 
