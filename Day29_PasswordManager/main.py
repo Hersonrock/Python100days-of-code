@@ -22,7 +22,7 @@ def add_to_file():
     webpage= website_entry.get()
     username= email_entry.get()
 
-    entry="".join(f"{webpage} | {username} | {password}\n")
+    entry=f"{webpage} | {username} | {password}\n"
 
     score_file = open("Day29_PasswordManager\database.txt",mode="a")
     score_file.write(entry)
