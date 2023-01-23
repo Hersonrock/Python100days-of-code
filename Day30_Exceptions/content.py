@@ -13,3 +13,16 @@ else:  #Runs when try succedds
 finally:  #Runs regardless of try success
     file.close()
     print("file was closed")
+
+
+
+#Raise your own exceptions
+
+height= float(input("Height: "))
+weight= int(input("Weight: "))
+
+if height>3:
+    raise ValueError("Human Height should not be over 3 meters.")  # this will create a a ValueError that can be caught by an exception block. 
+
+bmi= weight / height ** 2
+print(bmi)
