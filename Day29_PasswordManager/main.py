@@ -22,16 +22,18 @@ def add_to_file():
     username= email_entry.get()
     password= password_entry.get()
 
-    if webpage=="" or username =="" or password=="":
+    if len(webpage)*len(username)*len(password)==0:
         messagebox.showwarning(title="Warning",message="Please complete the fields.")
     else:
 
-        entry=f"{webpage} | {username} | {password}\n"
-        score_file = open("Day29_PasswordManager\database.txt",mode="a")
-        score_file.write(entry)
-        score_file.close()
-        password_entry.delete(0, END)
-        
+        is_ok=messagebox.askokcancel(title="Save to file",message=f"Webpage:\t{webpage}\nUsername/Email:\t{username}\nPassword:\t{password}\nPress ok to continue... ")
+        if is_ok:
+            entry=f"{webpage} | {username} | {password}\n"
+            score_file = open("Day29_PasswordManager\database.txt",mode="a")
+            score_file.write(entry)
+            score_file.close()
+            password_entry.delete(0, END)
+
 
 
 # ---------------------------- UI SETUP ------------------------------- #
