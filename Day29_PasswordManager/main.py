@@ -8,6 +8,33 @@ LETTER=4
 SYMBOLS=4
 NUMBERS=4
 
+
+#--------------------------------SEARCH-------------------------------------------#
+
+def search():
+    website=website_entry.get()
+    try:
+        database_file = open("Day29_PasswordManager\database.json",mode="r")
+    except FileNotFoundError:
+        messagebox.showwarning(title="Warning",message="There are no saved passwords")
+    else:
+        data=json.load(database_file)
+        database_file.close()
+        email_entry.delete(0, END)
+        password_entry.delete(0, END)
+        if website in data:
+            username=data[website]["username"]
+            password=data[website]["password"]
+
+            email_entry.insert(0,string=username)
+            password_entry.insert(0,string=password)
+            write_label("Website Found")
+        else:
+            write_label("No entry for Website...")
+
+                
+
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 def generate_pass():
@@ -55,11 +82,11 @@ def add_to_file():
             json.dump(data,database_file,indent=4)
             database_file.close()
             password_entry.delete(0, END)
+            write_label("Password saved")
             
 
 def write_label(entry):
-    output_label=Label(text=entry,bg="white")
-    output_label.grid(column=1,row=5,sticky="w")
+    output_label.config(text=entry)
 
 
 
@@ -80,6 +107,9 @@ website_label.grid(column=0,row=1,sticky="e")
 website_entry=Entry(width=32)
 website_entry.grid(column=1,row=1,columnspan=2,sticky="w")
 website_entry.focus()
+
+website_search_btn=Button(text="Search",command=search,width=14)
+website_search_btn.grid(column=2,row=1,columnspan=2)
 
 #row 2
 email_label=Label(text="Email/Username:",bg="white")
@@ -102,6 +132,10 @@ password_entry.grid(column=1,row=3,sticky="w")
 add_btn=Button(text="Add",command=add_to_file,width=43)
 add_btn.grid(column=1,row=4,columnspan=2)
 
+
+#row 5
+output_label=Label(text="",bg="white")
+output_label.grid(column=1,row=5,sticky="w")
 
 
 
