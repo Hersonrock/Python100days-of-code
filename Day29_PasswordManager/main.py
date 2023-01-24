@@ -38,12 +38,17 @@ def add_to_file():
 
         is_ok=messagebox.askokcancel(title="Save to file",message=f"Webpage:\t{webpage}\nUsername/Email:\t{username}\nPassword:\t{password}\nPress OK to continue... ")
         if is_ok:
-            database_file = open("Day29_PasswordManager\database.json",mode="r")
+            try:
+                #Opening file
+                database_file = open("Day29_PasswordManager\database.json",mode="r")
+                data=json.load(database_file)
+            except FileNotFoundError:
+                database_file = open("Day29_PasswordManager\database.json",mode="w")
+                json.dump(new_data,database_file,indent=4)
+            else:
+                #Updating Data
+                data.update(new_data)
 
-            #Reading Data
-            data=json.load(database_file)
-            #Updating Data
-            data.update(new_data)
             #Saving updated data
             database_file.close()
             database_file = open("Day29_PasswordManager\database.json",mode="w")
