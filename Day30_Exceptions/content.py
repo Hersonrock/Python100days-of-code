@@ -26,3 +26,11 @@ if height>3:
 
 bmi= weight / height ** 2
 print(bmi)
+
+
+#Inbuilt Json library
+
+# json.dump()
+# json.load()
+# json.update()
+
