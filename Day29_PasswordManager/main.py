@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from PasswordGenerator import password_gen
 import pyperclip
+import json
 
 LETTER=4
 SYMBOLS=4
@@ -24,6 +25,12 @@ def add_to_file():
     webpage= website_entry.get()
     username= email_entry.get()
     password= password_entry.get()
+    new_data={
+        webpage:{
+            "username":username,
+            "password":password
+        }
+    }
 
     if len(webpage)*len(username)*len(password)==0:
         messagebox.showwarning(title="Warning",message="Please complete the fields.")
@@ -31,10 +38,17 @@ def add_to_file():
 
         is_ok=messagebox.askokcancel(title="Save to file",message=f"Webpage:\t{webpage}\nUsername/Email:\t{username}\nPassword:\t{password}\nPress OK to continue... ")
         if is_ok:
-            entry=f"{webpage} | {username} | {password}\n"
-            score_file = open("Day29_PasswordManager\database.txt",mode="a")
-            score_file.write(entry)
-            score_file.close()
+            database_file = open("Day29_PasswordManager\database.json",mode="r")
+
+            #Reading Data
+            data=json.load(database_file)
+            #Updating Data
+            data.update(new_data)
+            #Saving updated data
+            database_file.close()
+            database_file = open("Day29_PasswordManager\database.json",mode="w")
+            json.dump(data,database_file,indent=4)
+            database_file.close()
             password_entry.delete(0, END)
             
 
